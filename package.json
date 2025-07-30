@@ -1,11 +1,14 @@
 {
   "name": "ginzanever",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Ginza Never Website",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "sass src/assets/_scss:src/assets/css --watch",
+    "build": "sass src/assets/_scss:src/assets/css --style compressed"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.89.2"
+  }
 }
