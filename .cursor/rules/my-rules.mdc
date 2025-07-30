@@ -1,42 +1,45 @@
 ---
 description: |
-  ## pull request 作成手順
+  # Pull Request 作成ガイドライン
 
-  ### 必須前提条件
+  ## 1. 事前確認事項
 
-  - Issue 番号の確認
-    - Issue のリンクが提供されていない場合は、必ずユーザーに「関連する Issue のリンクはありますか？」と確認する
-    - Issue が存在しない場合は、その旨を PR の説明に明記する
+  ### Issue の確認（必須）
+  - Issue 番号を確認
+  - Issue リンクが未提供の場合、ユーザーに確認
+  - Issue が存在しない場合、PR の説明にその旨を記載
+
+  ## 2. 技術的な確認
 
   ### 差分の確認
+  - マージ先ブランチ（デフォルト: main）との差分を確認
+    ```bash
+    git diff origin/{{マージ先ブランチ}}...HEAD | cat
+    ```
 
-  - {{マージ先ブランチ}}は特に指示がなければ main とする
-  - `git diff origin/{{マージ先ブランチ}}...HEAD | cat` でマージ先ブランチとの差分を確認
+  ## 3. Pull Request の作成
 
-  ### description に記載するリンクの準備
+  ### 必要な情報の準備
+  - Issue リンクの用意（事前確認済みであること）
+  - PR テンプレートの内容確認（@PULL_REQUEST_TEMPLATE.md から取得）
 
-  - Issue のリンクを確認（必須前提条件で確認済みであること）
-
-  ### Pull Request 作成とブラウザでの表示
-
-  - 以下のコマンドで pull request を作成し、自動的にブラウザで開く
-  - PR タイトルおよび PR テンプレートはマージ先との差分をもとに適切な内容にする
-  - 指示がない限り Draft で pull request を作成
-  - `{{PRテンプレートを1行に変換}}`の部分は PR テンプレートの内容を`\n`で改行表現した 1 行の文字列
-  - 各セクションを明確に区分
-  - 必要な情報を漏れなく記載
-
-  ---
-
+  ### PR の作成と公開
+  ```bash
   git push origin HEAD && \
   echo -e "{{PRテンプレートを1行に変換}}" | \
   gh pr create --draft --title "{{PRタイトル}}" --body-file - && \
   gh pr view --web
-  ---
+  ```
 
-  #### PR テンプレート
+  ### PR 作成時の注意点
+  - 特に指定がない限り Draft で作成
+  - PR タイトルは差分内容を適切に反映
+  - 各セクションを明確に区分
+  - 必要情報を漏れなく記載
 
-  @PULL_REQUEST_TEMPLATE.md からテンプレート内容を取得すること
+  ## 4. サイト制作のベストプラクティス
+  - モバイルファーストアプローチを採用
+
 globs:
   - "**/.git/COMMIT_EDITMSG"
 alwaysApply: true
