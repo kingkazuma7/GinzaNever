@@ -6,10 +6,9 @@ const path = require('path');
 const config = {
   inputDir: 'src/assets/images/original', // オリジナル画像のディレクトリ
   outputDir: 'src/assets/images', // 最適化した画像の出力先
-  sizes: {
-    large: 1920,
-    medium: 1280,
-    small: 768
+  size: {
+    width: 1280, // mediumサイズ
+    height: null // アスペクト比を維持
   },
   quality: 80, // JPEG品質（0-100）
   webpQuality: 75 // WebP品質（0-100）
@@ -17,11 +16,7 @@ const config = {
 
 // 出力ディレクトリの作成
 async function createOutputDirs() {
-  for (const size in config.sizes) {
-    const dir = path.join(config.outputDir, size);
-    await fs.mkdir(dir, { recursive: true });
-  }
-  // WebP用ディレクトリ
+  await fs.mkdir(config.outputDir, { recursive: true });
   await fs.mkdir(path.join(config.outputDir, 'webp'), { recursive: true });
 }
 
@@ -30,24 +25,22 @@ async function optimizeImage(inputFile) {
   const filename = path.basename(inputFile);
   const nameWithoutExt = path.parse(filename).name;
 
-  // 各サイズの画像を生成
-  for (const [size, width] of Object.entries(config.sizes)) {
-    const outputPath = path.join(config.outputDir, size, filename);
-    await sharp(inputFile)
-      .resize(width, null, { 
-        withoutEnlargement: true,
-        fit: 'inside'
-      })
-      .jpeg({ quality: config.quality })
-      .toFile(outputPath);
-    
-    console.log(`Created ${size} image: ${outputPath}`);
-  }
+  // JPEG/PNG画像を生成
+  const outputPath = path.join(config.outputDir, filename);
+  await sharp(inputFile)
+    .resize(config.size.width, config.size.height, { 
+      withoutEnlargement: true,
+      fit: 'inside'
+    })
+    .jpeg({ quality: config.quality })
+    .toFile(outputPath);
+  
+  console.log(`Created optimized image: ${outputPath}`);
 
   // WebP形式で保存
   const webpPath = path.join(config.outputDir, 'webp', `${nameWithoutExt}.webp`);
   await sharp(inputFile)
-    .resize(config.sizes.large, null, { 
+    .resize(config.size.width, config.size.height, { 
       withoutEnlargement: true,
       fit: 'inside'
     })
@@ -69,13 +62,16 @@ async function main() {
       /\.(jpg|jpeg|png)$/i.test(file)
     );
 
+    console.log(`Found ${imageFiles.length} images to process...`);
+
     // 各画像を処理
     for (const file of imageFiles) {
       const inputPath = path.join(config.inputDir, file);
+      console.log(`Processing: ${file}`);
       await optimizeImage(inputPath);
     }
 
-    console.log('Image optimization completed successfully!');
+    console.log('Image optimization completed successfully! 🎉');
   } catch (error) {
     console.error('Error during image optimization:', error);
   }
