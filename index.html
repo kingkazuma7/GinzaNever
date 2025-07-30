@@ -2,8 +2,8 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>fullPage.jsデモ</title>
-<meta name="description" content="fullPage.jsを使用したデモサイトです。">
+<title>Ginza Never</title>
+<meta name="description" content="銀座の隠れ家的なラグジュアリーバー。上質な空間で特別なひとときをお過ごしください。">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <!-- Import CSS -->
@@ -14,83 +14,160 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Noto Sans JP', sans-serif;
+  color: #fff;
+  background: #000;
 }
 
 /* セクションのスタイル */
 .section {
   text-align: center;
   padding: 20px;
-  color: #fff;
+  background-color: #000;
 }
 
-/* 各セクションの背景色 */
-.section1 { background: linear-gradient(45deg, #FF6B6B, #4ECDC4); }
-.section2 { background: linear-gradient(45deg, #45B7D1, #A6CFE2); }
-.section3 { background: linear-gradient(45deg, #96E6A1, #D4FC79); }
-.section4 { background: linear-gradient(45deg, #FFA8A8, #FFE08A); }
+/* メインビジュアル */
+.section1 {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('/src/assets/images/main-visual.jpg') center/cover;
+}
+
+/* コンセプト */
+.section2 {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+              url('/src/assets/images/concept.jpg') center/cover;
+}
+
+/* ギャラリー */
+.section3 {
+  background-color: #0a0a0a;
+}
+
+/* 基本情報 */
+.section4 {
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+              url('/src/assets/images/footer-bg.jpg') center/cover;
+}
 
 /* コンテンツのスタイル */
 .content {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 4em;
   margin-bottom: 20px;
+  font-weight: 200;
+  letter-spacing: 0.1em;
+}
+
+h2 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  font-weight: 200;
+  letter-spacing: 0.1em;
 }
 
 p {
   font-size: 1.2em;
-  line-height: 1.6;
+  line-height: 2;
   margin-bottom: 30px;
+  letter-spacing: 0.05em;
 }
 
-.button {
-  display: inline-block;
-  padding: 15px 30px;
-  background: rgba(255,255,255,0.2);
+/* ギャラリーグリッド */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  aspect-ratio: 16/9;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+  opacity: 1;
+}
+
+/* 情報セクション */
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.contact-info {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.contact-info a {
   color: #fff;
   text-decoration: none;
-  border-radius: 5px;
-  transition: background 0.3s;
+  transition: color 0.3s;
 }
 
-.button:hover {
-  background: rgba(255,255,255,0.3);
+.contact-info a:hover {
+  color: #c4a046;
 }
 
-/* スライド */
-.slide {
-  padding: 20px;
+.social-links {
+  margin-top: 30px;
 }
 
-/* カード */
-.card {
-  background: rgba(255,255,255,0.1);
-  padding: 20px;
-  border-radius: 10px;
-  backdrop-filter: blur(5px);
-  margin: 10px;
+.social-links a {
+  color: #fff;
+  font-size: 2em;
+  margin: 0 15px;
+  transition: color 0.3s;
 }
 
-/* アニメーション用クラス */
-.fp-viewing-1 .animate {
-  animation: fadeInUp 1s ease-out;
+.social-links a:hover {
+  color: #c4a046;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  h1 { font-size: 2.5em; }
+  h2 { font-size: 1.8em; }
+  p { font-size: 1em; }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
@@ -98,60 +175,76 @@ p {
   <!-- セクション1: メインビジュアル -->
   <div class="section section1">
     <div class="content">
-      <h1>fullPage.jsデモ</h1>
-      <p>美しいフルページスクロールを実現するデモサイトです。</p>
-      <a href="#" class="button">詳しく見る</a>
+      <h1>Ginza Never</h1>
+      <p>銀座の隠れ家的なラグジュアリーバー</p>
     </div>
   </div>
 
-  <!-- セクション2: 水平スライド -->
+  <!-- セクション2: コンセプト -->
   <div class="section section2">
-    <div class="slide">
-      <div class="content">
-        <h2>スライド 1</h2>
-        <p>水平方向のスライドも実装できます。</p>
-      </div>
-    </div>
-    <div class="slide">
-      <div class="content">
-        <h2>スライド 2</h2>
-        <p>矢印キーで操作可能です。</p>
-      </div>
-    </div>
-    <div class="slide">
-      <div class="content">
-        <h2>スライド 3</h2>
-        <p>スワイプでも移動できます。</p>
-      </div>
+    <div class="content">
+      <h2>Concept</h2>
+      <p>上質な空間で過ごす特別なひととき</p>
+      <p>洗練された雰囲気の中で、贅沢なくつろぎのひとときをお過ごしください。</p>
     </div>
   </div>
 
-  <!-- セクション3: アニメーション -->
+  <!-- セクション3: ギャラリー -->
   <div class="section section3">
     <div class="content">
-      <h2 class="animate">アニメーション</h2>
-      <div class="card animate">
-        <p>セクションの切り替え時にアニメーションを追加できます。</p>
+      <h2>Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="/src/assets/images/counter.jpg" alt="カウンター">
+          <div class="gallery-caption">
+            <h3>Counter</h3>
+            <p>落ち着いた雰囲気のカウンター席</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="/src/assets/images/sofa.jpg" alt="ソファー席">
+          <div class="gallery-caption">
+            <h3>Sofa Seats</h3>
+            <p>ゆったりとくつろげるソファー席</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="/src/assets/images/golf.jpg" alt="ゴルフシミュレーター">
+          <div class="gallery-caption">
+            <h3>Golf Simulator</h3>
+            <p>本格的なゴルフシミュレーター完備</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="/src/assets/images/karaoke.jpg" alt="カラオケ">
+          <div class="gallery-caption">
+            <h3>Karaoke</h3>
+            <p>プライベート空間でのカラオケ</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- セクション4: グリッドレイアウト -->
+  <!-- セクション4: 基本情報 -->
   <div class="section section4">
     <div class="content">
-      <h2>機能紹介</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-        <div class="card">
-          <h3>レスポンシブ</h3>
-          <p>様々な画面サイズに対応</p>
+      <h2>Information</h2>
+      <div class="info-container">
+        <div class="contact-info">
+          <p>
+            <i class="fas fa-map-marker-alt"></i>
+            東京都中央区銀座7-5-15 AG1ビル1F
+          </p>
+          <p>
+            <i class="fas fa-phone"></i>
+            <a href="tel:03-6280-6563">03-6280-6563</a>
+          </p>
         </div>
-        <div class="card">
-          <h3>カスタマイズ</h3>
-          <p>豊富なオプション設定</p>
-        </div>
-        <div class="card">
-          <h3>アクセシビリティ</h3>
-          <p>キーボード操作対応</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/ginzanever" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-instagram"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -168,12 +261,8 @@ new fullpage('#fullpage', {
   navigation: true,
   navigationPosition: 'right',
   
-  // スライド設定
-  controlArrows: true,
-  slidesNavigation: true,
-  
   // スクロール設定
-  scrollingSpeed: 700,
+  scrollingSpeed: 1000,
   autoScrolling: true,
   fitToSection: true,
   
@@ -182,17 +271,11 @@ new fullpage('#fullpage', {
   
   // アニメーション設定
   afterLoad: function(origin, destination, direction) {
-    if(destination.index === 2) { // セクション3に到達したとき
-      document.querySelectorAll('.animate').forEach(el => {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      });
-    }
-  },
-  
-  // スライド到達時のコールバック
-  afterSlideLoad: function(section, origin, destination, direction) {
-    console.log("スライド到達:", destination.index);
+    const currentSection = destination.item;
+    currentSection.querySelectorAll('.content').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    });
   }
 });
 </script>
