@@ -2,64 +2,200 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title></title>
-<meta name="description" content="">
-<meta name="keywords" content="">
+<title>fullPage.jsデモ</title>
+<meta name="description" content="fullPage.jsを使用したデモサイトです。">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="format-detection" content="telephone=no,email=no,address=no">
-<link rel="canonical" href="">
-<link rel="icon" href="favicon.ico">
-<link rel="apple-touch-icon" href="icon.png">
-
-<!-- OGP -->
-<meta property="og:url" content="">
-<meta property="og:type" content="">
-<meta property="og:title" content="">
-<meta property="og:description" content="">
-<meta property="og:site_name" content="">
-<meta property="og:image" content="">
-<meta property="og:locale" content="ja_JP">
-
-<!-- OGP Facebook -->
-<meta property="fb:app_id" content="">
-
-<!-- OGP Twitter -->
-<meta name="twitter:card" content="">
-<meta name="twitter:site" content="">
-<meta name="twitter:creator" content="">
-<meta name="twitter:title" content="">
-<meta name="twitter:description" content="">
-<meta name="twitter:image" content="">
-
-<!-- Import Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 
 <!-- Import CSS -->
-<link rel="stylesheet" href="/common/css/reset.css">
-<link rel="stylesheet" href="/common/css/style.css">
+<link href="https://cdn.jsdelivr.net/npm/fullpage.js@4.0.29/dist/fullpage.min.css" rel="stylesheet">
+<style>
+/* 基本スタイル */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+}
 
-<!-- Import JS/jQuery Library -->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+/* セクションのスタイル */
+.section {
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+}
+
+/* 各セクションの背景色 */
+.section1 { background: linear-gradient(45deg, #FF6B6B, #4ECDC4); }
+.section2 { background: linear-gradient(45deg, #45B7D1, #A6CFE2); }
+.section3 { background: linear-gradient(45deg, #96E6A1, #D4FC79); }
+.section4 { background: linear-gradient(45deg, #FFA8A8, #FFE08A); }
+
+/* コンテンツのスタイル */
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.button {
+  display: inline-block;
+  padding: 15px 30px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* スライド */
+.slide {
+  padding: 20px;
+}
+
+/* カード */
+.card {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  margin: 10px;
+}
+
+/* アニメーション用クラス */
+.fp-viewing-1 .animate {
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
 </head>
 <body>
 
-<!-- START Header Area -->
-<header></header>
-<!-- END Header Area -->
+<div id="fullpage">
+  <!-- セクション1: メインビジュアル -->
+  <div class="section section1">
+    <div class="content">
+      <h1>fullPage.jsデモ</h1>
+      <p>美しいフルページスクロールを実現するデモサイトです。</p>
+      <a href="#" class="button">詳しく見る</a>
+    </div>
+  </div>
 
-<!-- START Main Area -->
-<main></main>
-<!-- END Main Area -->
+  <!-- セクション2: 水平スライド -->
+  <div class="section section2">
+    <div class="slide">
+      <div class="content">
+        <h2>スライド 1</h2>
+        <p>水平方向のスライドも実装できます。</p>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="content">
+        <h2>スライド 2</h2>
+        <p>矢印キーで操作可能です。</p>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="content">
+        <h2>スライド 3</h2>
+        <p>スワイプでも移動できます。</p>
+      </div>
+    </div>
+  </div>
 
-<!-- START Footer Area -->
-<footer></footer>
-<!-- END Footer Area -->
+  <!-- セクション3: アニメーション -->
+  <div class="section section3">
+    <div class="content">
+      <h2 class="animate">アニメーション</h2>
+      <div class="card animate">
+        <p>セクションの切り替え時にアニメーションを追加できます。</p>
+      </div>
+    </div>
+  </div>
 
+  <!-- セクション4: グリッドレイアウト -->
+  <div class="section section4">
+    <div class="content">
+      <h2>機能紹介</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <div class="card">
+          <h3>レスポンシブ</h3>
+          <p>様々な画面サイズに対応</p>
+        </div>
+        <div class="card">
+          <h3>カスタマイズ</h3>
+          <p>豊富なオプション設定</p>
+        </div>
+        <div class="card">
+          <h3>アクセシビリティ</h3>
+          <p>キーボード操作対応</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Import JS -->
-<script src="/common/js/function.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
+<script>
+new fullpage('#fullpage', {
+  // 基本設定
+  licenseKey: 'YOUR_KEY_HERE',
+  navigation: true,
+  navigationPosition: 'right',
+  
+  // スライド設定
+  controlArrows: true,
+  slidesNavigation: true,
+  
+  // スクロール設定
+  scrollingSpeed: 700,
+  autoScrolling: true,
+  fitToSection: true,
+  
+  // レスポンシブ設定
+  responsiveWidth: 768,
+  
+  // アニメーション設定
+  afterLoad: function(origin, destination, direction) {
+    if(destination.index === 2) { // セクション3に到達したとき
+      document.querySelectorAll('.animate').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+    }
+  },
+  
+  // スライド到達時のコールバック
+  afterSlideLoad: function(section, origin, destination, direction) {
+    console.log("スライド到達:", destination.index);
+  }
+});
+</script>
 
 </body>
-</html>
+</html> 
