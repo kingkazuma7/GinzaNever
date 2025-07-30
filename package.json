@@ -4,11 +4,13 @@
   "description": "Ginza Never Website",
   "scripts": {
     "sass": "sass src/assets/_scss:src/assets/css --watch",
-    "build": "sass src/assets/_scss:src/assets/css --style compressed"
+    "build": "sass src/assets/_scss:src/assets/css --style compressed",
+    "optimize-images": "node scripts/optimize-images.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "sass": "^1.89.2"
+    "sass": "^1.72.0",
+    "sharp": "^0.34.3"
   }
 }
