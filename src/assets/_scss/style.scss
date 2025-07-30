@@ -1,10 +1,27 @@
+// フォント設定
+$font-family-base: 'Lato', 'Noto Sans JP', sans-serif;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
 /* 基本スタイル */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: $font-family-base;
+  font-weight: $font-weight-normal;
   color: #fff;
   background: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 見出しスタイル */
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-base;
+  font-weight: $font-weight-light;
+  letter-spacing: 0.1em;
 }
 
 /* セクションのスタイル */
@@ -47,14 +64,14 @@ body {
 h1 {
   font-size: 4em;
   margin-bottom: 20px;
-  font-weight: 200;
+  font-weight: $font-weight-light;
   letter-spacing: 0.1em;
 }
 
 h2 {
   font-size: 2.5em;
   margin-bottom: 30px;
-  font-weight: 200;
+  font-weight: $font-weight-light;
   letter-spacing: 0.1em;
 }
 
@@ -63,6 +80,12 @@ p {
   line-height: 2;
   margin-bottom: 30px;
   letter-spacing: 0.05em;
+  font-weight: $font-weight-normal;
+
+  &.lead {
+    font-size: 1.4em;
+    font-weight: $font-weight-light;
+  }
 }
 
 /* ギャラリーグリッド */
@@ -108,6 +131,17 @@ p {
     color: #fff;
     opacity: 0;
     transition: opacity 0.3s ease;
+
+    h3 {
+      font-size: 1.4em;
+      margin-bottom: 10px;
+      font-weight: $font-weight-light;
+    }
+
+    p {
+      font-size: 1em;
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -129,6 +163,7 @@ p {
     color: #fff;
     text-decoration: none;
     transition: color 0.3s;
+    font-weight: $font-weight-normal;
 
     &:hover {
       color: #c4a046;
@@ -163,6 +198,10 @@ p {
   
   p { 
     font-size: 1em; 
+
+    &.lead {
+      font-size: 1.2em;
+    }
   }
   
   .gallery-grid {
