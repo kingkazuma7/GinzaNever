@@ -14,7 +14,6 @@ function initializeFullPage() {
     
     // タッチデバイス設定
     touchSensitivity: 15,
-    normalScrollElements: '.gallery-grid',
     
     // レスポンシブ設定
     responsiveWidth: 768,
@@ -44,12 +43,58 @@ function initializeFullPage() {
   new fullpage('#fullpage', fpOptions);
 }
 
-// コンテンツのアニメーション処理
+// アニメーション実行済みフラグ
+const animatedSections = new Set();
+
+// アニメーションとコンテンツ表示の制御
 function animateContent(section) {
-  const contentElements = section.querySelectorAll('.content');
-  contentElements.forEach(el => {
-    el.style.opacity = '1';
-    el.style.transform = 'translateY(0)';
+  // セクションのインデックスを取得
+  const sectionIndex = Array.from(document.querySelectorAll('.section')).indexOf(section);
+  
+  // すでにアニメーション済みの場合はスキップ
+  if (animatedSections.has(sectionIndex)) {
+    return;
+  }
+  
+  // アニメーション済みとしてマーク
+  animatedSections.add(sectionIndex);
+  
+  const items = section.querySelectorAll('.gallery-item, h2, p, .btn-more, .contact-info, .social-links');
+  
+  // ギャラリーセクションの特別な処理
+  if (section.classList.contains('section3')) {
+    // スライダーの再初期化とスムーズなアニメーション
+    setTimeout(() => {
+      const slider = section.querySelector('.gallery-slider');
+      if (slider && slider.swiper) {
+        // スライダーのアニメーション効果を再トリガー
+        const slides = slider.swiper.slides;
+        slides.forEach((slide, index) => {
+          slide.style.opacity = '0';
+          slide.style.transform = 'translateY(30px) scale(0.9)';
+          setTimeout(() => {
+            slide.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            slide.style.opacity = index < 2 ? '1' : '0.7'; // 最初の2つをアクティブに
+            slide.style.transform = index < 2 ? 'translateY(0) scale(1)' : 'translateY(0) scale(0.95)';
+          }, index * 200);
+        });
+      }
+    }, 300);
+  }
+  
+  items.forEach((item, index) => {
+    // 初期状態をリセット
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(30px)';
+    item.style.filter = 'blur(5px)';
+    
+    // 段階的にアニメーション
+    setTimeout(() => {
+      item.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+      item.style.filter = 'blur(0)';
+    }, index * 150 + 200);
   });
 }
 
@@ -99,21 +144,84 @@ function initializeLazyLoading() {
 
 // ギャラリースライダーの初期化
 function initializeGallerySlider() {
-  if (window.innerWidth < 769) {
-    new Swiper('.gallery-slider-sp', {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      loop: true,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
+  // ギャラリースライダー（PC: 2カラム、モバイル: 1カラム）
+  const gallerySlider = new Swiper('.gallery-slider', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true, // 無限スクロール
+    loopAdditionalSlides: 2, // より滑らかなループのために追加スライド
+    speed: 1200, // より滑らかなスピード（1.2秒）
+    effect: 'slide',
+    
+    // 高級感のあるイージング
+    autoplay: {
+      delay: 5000, // より余裕のある間隔
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true, // マウスホバーで一時停止
+    },
+    
+    // スムーズなトランジション設定
+    watchSlidesProgress: true,
+    watchSlidesVisibility: true,
+    centeredSlides: false,
+    
+    // ページネーション
+    pagination: {
+      el: '.gallery-slider .swiper-pagination',
+      clickable: true,
+      dynamicBullets: true, // ダイナミックドット
+      dynamicMainBullets: 3, // 表示するメインドット数
+    },
+    
+    // レスポンシブ設定
+    breakpoints: {
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 40, // より広い間隔
+        slidesPerGroup: 2,
+        centeredSlides: false,
+      }
+    },
+    
+    // 高級感のあるスムーズなイベント
+    on: {
+      init: function() {
+        // 初期化フラグをチェック（1度だけ実行）
+        if (this.el.dataset.initialized) return;
+        this.el.dataset.initialized = 'true';
+        
+        // 初期化時のフェードイン効果
+        const slides = this.slides;
+        slides.forEach((slide, index) => {
+          slide.style.opacity = '0';
+          slide.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            slide.style.transition = 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            slide.style.opacity = '1';
+            slide.style.transform = 'translateY(0)';
+          }, index * 150);
+        });
       },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
+      
+      slideChange: function() {
+        // スライド変更時のスムーズな効果
+        const activeSlide = this.slides[this.activeIndex];
+        if (activeSlide) {
+          activeSlide.style.transform = 'scale(1.02)';
+          setTimeout(() => {
+            activeSlide.style.transform = 'scale(1)';
+          }, 300);
+        }
       },
-    });
-  }
+      
+      transitionStart: function() {
+        // トランジション開始時
+        this.slides.forEach(slide => {
+          slide.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        });
+      }
+    }
+  });
 }
 
 // 初期化関数
@@ -122,6 +230,14 @@ function initialize() {
   initializeMobileScroll();
   initializeLazyLoading();
   initializeGallerySlider();
+  
+  // 最初のセクションのアニメーションを実行
+  setTimeout(() => {
+    const firstSection = document.querySelector('.section1');
+    if (firstSection) {
+      animateContent(firstSection);
+    }
+  }, 1000);
 }
 
 // DOMContentLoadedイベントで初期化を実行
