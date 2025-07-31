@@ -14,12 +14,18 @@ $breakpoint-desktop: 769px;
   }
 }
 
+// ベースフォントサイズの設定
+html {
+  font-size: 62.5%; // 1rem = 10px
+}
+
 // 基本スタイル - スマートフォンファースト
 body {
   margin: 0;
   padding: 0;
   font-family: $font-family-base;
   font-weight: 400;
+  font-size: 1.6rem; // 16px
   color: $color-white;
   background: $color-black;
   -webkit-font-smoothing: antialiased;
@@ -31,44 +37,45 @@ body {
   font-family: $font-family-base;
   font-weight: 300;
   letter-spacing: 0.1em;
+  margin: 0;
 }
 
 h1 {
   @extend %heading-base;
-  font-size: 2.5em;
-  margin-bottom: 20px;
+  font-size: 2.5rem; // 25px
+  margin-bottom: 2rem;
 
   @include desktop {
-    font-size: 4em;
+    font-size: 4rem; // 40px
   }
 }
 
 h2 {
   @extend %heading-base;
-  font-size: 1.8em;
-  margin-bottom: 30px;
+  font-size: 1.8rem; // 18px
+  margin-bottom: 3rem;
 
   @include desktop {
-    font-size: 2.5em;
+    font-size: 2.5rem; // 25px
   }
 }
 
 p {
-  font-size: 1em;
+  font-size: 1.6rem; // 16px
   line-height: 1.8;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
   letter-spacing: 0.05em;
 
   @include desktop {
-    font-size: 1.2em;
+    font-size: 1.8rem; // 18px
   }
 
   &.lead {
-    font-size: 1.2em;
+    font-size: 1.8rem; // 18px
     font-weight: 300;
 
     @include desktop {
-      font-size: 1.4em;
+      font-size: 2rem; // 20px
     }
   }
 }
@@ -78,22 +85,22 @@ p {
   text-align: center;
   min-height: 100vh;
   height: auto;
-  padding: 60px 15px;
+  padding: 6rem 1.5rem;
   background-color: $color-black;
 
   @include desktop {
-    padding: 20px;
+    padding: 2rem;
   }
 }
 
 // コンテンツのスタイル
 .content {
-  max-width: 1200px;
+  max-width: 120rem; // 1200px
   margin: 0 auto;
-  padding: 10px;
+  padding: 1rem;
 
   @include desktop {
-    padding: 20px;
+    padding: 2rem;
   }
 }
 
@@ -125,10 +132,10 @@ p {
 // ギャラリーグリッド
 .gallery {
   &-grid {
-    padding: 10px;
+    padding: 1rem;
 
     @include desktop {
-      padding: 20px;
+      padding: 2rem;
     }
   }
 
@@ -139,7 +146,7 @@ p {
     @include desktop {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 2rem;
     }
   }
 
@@ -148,18 +155,18 @@ p {
     display: block;
     width: 100%;
     height: auto;
-    padding-bottom: 40px; // ページネーション用の余白
+    padding-bottom: 4rem; // ページネーション用の余白
 
     @include desktop {
       display: none;
     }
 
     .swiper-pagination {
-      bottom: 10px;
+      bottom: 1rem;
 
       &-bullet {
-        width: 8px;
-        height: 8px;
+        width: 0.8rem;
+        height: 0.8rem;
         background: rgba(255, 255, 255, 0.5);
         opacity: 1;
 
@@ -173,7 +180,7 @@ p {
   &-item {
     position: relative;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     aspect-ratio: 4/3;
 
     @include desktop {
@@ -192,31 +199,31 @@ p {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 15px;
+    padding: 1.5rem;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     color: $color-white;
 
     @include desktop {
-      padding: 20px;
+      padding: 2rem;
     }
 
     h3 {
       @extend %heading-base;
-      font-size: 1.2em;
-      margin-bottom: 5px;
+      font-size: 1.6rem; // 16px
+      margin-bottom: 0.5rem;
 
       @include desktop {
-        font-size: 1.4em;
-        margin-bottom: 10px;
+        font-size: 1.8rem; // 18px
+        margin-bottom: 1rem;
       }
     }
 
     p {
-      font-size: 0.9em;
+      font-size: 1.4rem; // 14px
       margin-bottom: 0;
 
       @include desktop {
-        font-size: 1em;
+        font-size: 1.6rem; // 16px
       }
     }
   }
@@ -228,14 +235,14 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 2rem;
   }
 }
 
 // コンタクト情報
 .contact-info {
   text-align: center;
-  margin: 10px 0;
+  margin: 1rem 0;
 
   a {
     color: $color-white;
@@ -244,30 +251,30 @@ p {
     font-weight: 400;
 
     &:focus {
-      outline: 2px solid $color-white;
-      outline-offset: 2px;
+      outline: 0.2rem solid $color-white;
+      outline-offset: 0.2rem;
     }
   }
 }
 
 // ソーシャルリンク
 .social-links {
-  margin-top: 20px;
+  margin-top: 2rem;
 
   a {
     color: $color-white;
-    font-size: 1.8em;
-    margin: 0 10px;
+    font-size: 1.8rem;
+    margin: 0 1rem;
     transition: color 0.3s;
 
     @include desktop {
-      font-size: 2em;
-      margin: 0 15px;
+      font-size: 2rem;
+      margin: 0 1.5rem;
     }
 
     &:focus {
-      outline: 2px solid $color-white;
-      outline-offset: 2px;
+      outline: 0.2rem solid $color-white;
+      outline-offset: 0.2rem;
     }
   }
 }
