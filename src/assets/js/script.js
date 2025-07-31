@@ -97,12 +97,37 @@ function initializeLazyLoading() {
   }
 }
 
+// ギャラリースライダーの初期化
+function initializeGallerySlider() {
+  if (window.innerWidth < 769) {
+    new Swiper('.gallery-slider-sp', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+  }
+}
+
 // 初期化関数
 function initialize() {
   initializeFullPage();
   initializeMobileScroll();
   initializeLazyLoading();
+  initializeGallerySlider();
 }
 
 // DOMContentLoadedイベントで初期化を実行
 document.addEventListener('DOMContentLoaded', initialize);
+
+// リサイズ時のスライダー再初期化
+window.addEventListener('resize', function() {
+  initializeGallerySlider();
+});

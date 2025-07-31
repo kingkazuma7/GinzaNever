@@ -125,15 +125,48 @@ p {
 // ギャラリーグリッド
 .gallery {
   &-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
     padding: 10px;
 
     @include desktop {
+      padding: 20px;
+    }
+  }
+
+  // PCのグリッド表示
+  &-grid-pc {
+    display: none;
+
+    @include desktop {
+      display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      padding: 20px;
+    }
+  }
+
+  // SPのスライダー表示
+  &-slider-sp {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-bottom: 40px; // ページネーション用の余白
+
+    @include desktop {
+      display: none;
+    }
+
+    .swiper-pagination {
+      bottom: 10px;
+
+      &-bullet {
+        width: 8px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 1;
+
+        &-active {
+          background: $color-white;
+        }
+      }
     }
   }
 
@@ -151,7 +184,6 @@ p {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
     }
   }
 
@@ -163,7 +195,6 @@ p {
     padding: 15px;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     color: $color-white;
-    opacity: 1;
 
     @include desktop {
       padding: 20px;
