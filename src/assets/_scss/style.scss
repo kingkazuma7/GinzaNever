@@ -1,5 +1,6 @@
 // 変数定義
 $font-family-base: "Lato", "Noto Sans JP", sans-serif;
+$font-family-jp: "Noto Sans JP", "Lato", sans-serif;
 $color-white: #fff;
 $color-black: #000;
 $color-dark: #0a0a0a;
@@ -23,7 +24,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: $font-family-base;
+  font-family: $font-family-jp;
   font-weight: 400;
   font-size: 1.6rem; // 16px
   color: $color-white;
@@ -34,6 +35,13 @@ body {
 
 // 見出しスタイル
 %heading-base {
+  font-family: $font-family-jp;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+%heading-en {
   font-family: $font-family-base;
   font-weight: 300;
   letter-spacing: 0.1em;
@@ -48,6 +56,10 @@ h1 {
   @include desktop {
     font-size: 4rem; // 40px
   }
+  
+  &.en-title {
+    @extend %heading-en;
+  }
 }
 
 h2 {
@@ -58,6 +70,10 @@ h2 {
   @include desktop {
     font-size: 2.5rem; // 25px
   }
+  
+  &.en-title {
+    @extend %heading-en;
+  }
 }
 
 p {
@@ -65,6 +81,7 @@ p {
   line-height: 1.8;
   margin-bottom: 2rem;
   letter-spacing: 0.05em;
+  font-family: $font-family-jp;
 
   @include desktop {
     font-size: 1.8rem; // 18px
@@ -73,10 +90,17 @@ p {
   &.lead {
     font-size: 1.8rem; // 18px
     font-weight: 300;
+    font-family: $font-family-base;
 
     @include desktop {
       font-size: 2rem; // 20px
     }
+  }
+  
+  // 日本語テキスト専用
+  &.jp-text {
+    font-family: $font-family-jp;
+    letter-spacing: 0.1em;
   }
 }
 
@@ -476,6 +500,7 @@ p {
       letter-spacing: 0.1em;
       text-transform: uppercase;
       position: relative;
+      font-family: $font-family-base; // 英語キャプションなのでLato
       
       @include desktop {
         font-size: 2.2rem;
@@ -501,6 +526,7 @@ p {
       line-height: 1.8;
       font-weight: 300;
       letter-spacing: 0.05em;
+      font-family: $font-family-jp; // 日本語説明文
 
       @include desktop {
         font-size: 1.6rem;
@@ -523,18 +549,21 @@ p {
 .contact-info {
   text-align: center;
   margin: 1rem 0;
+  font-family: $font-family-jp;
 
   .en-address {
     display: block;
     font-size: 1.4rem;
     color: rgba($color-white, 0.8);
     margin-top: 0.5rem;
+    font-family: $font-family-base; // 英語住所
   }
 
   .contact-message {
     font-size: 1.4rem;
     color: rgba($color-white, 0.9);
     margin: 1.5rem 0;
+    font-family: $font-family-jp; // 日本語メッセージ
   }
 
   a {
