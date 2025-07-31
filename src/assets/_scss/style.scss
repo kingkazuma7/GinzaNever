@@ -116,9 +116,23 @@ p {
   position: relative;
   
   // 要素の初期状態（アニメーション用）
-  h2, p, .gallery-item, .btn-more, .contact-info, .social-links {
+  h2, p, .btn-more, .contact-info, .social-links {
     opacity: 0;
     transform: translateY(20px);
+  }
+  
+  // ギャラリーセクションは除外
+  &.section3 {
+    h2 {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .gallery-slider {
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
+    }
   }
 
   @include desktop {
@@ -309,6 +323,25 @@ p {
 
 .section3 {
   background-color: $color-dark;
+  
+  // fullPage.jsからSwiperを保護
+  .gallery-slider {
+    position: relative !important;
+    transform: none !important;
+    transition: none !important;
+    
+    * {
+      position: relative;
+      transform: none !important;
+      transition: transform 0.3s ease, opacity 0.3s ease !important;
+    }
+  }
+  
+  // Swiperの動作を確保
+  .swiper-slide {
+    transform: translateX(0) !important;
+    transition: transform 0.3s ease !important;
+  }
 }
 
 .section4 {
@@ -322,6 +355,8 @@ p {
     max-width: 100rem;
     margin: 0 auto;
     padding: 0 2rem;
+    position: relative;
+    z-index: 1;
     
     @include desktop {
       padding: 0 4rem;
@@ -330,33 +365,43 @@ p {
 
   &-slider {
     width: 100%;
+    height: auto;
     padding-bottom: 8rem; // ページネーション用の余白
-    overflow: hidden;
+    overflow: visible; // hiddenから変更
+    position: relative;
+    z-index: 2;
+    visibility: visible;
+    opacity: 1;
     
     .swiper-wrapper {
       align-items: stretch;
-      transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition-timing-function: linear; // 無限スクロール用に線形変化
+      display: flex;
+      height: auto;
+      visibility: visible;
     }
     
     .swiper-slide {
       height: auto;
-      display: flex;
-      opacity: 0; // 初期状態（アニメーション用）
-      transform: translateY(15px); // 初期状態（アニメーション用）
-      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex !important;
+      opacity: 1 !important; // 常に表示
+      visibility: visible !important;
+      transform: translateY(0); // 初期位置
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 3;
+      flex-shrink: 0; // スライドが縮小されないように
       
-      &.swiper-slide-active,
-      &.swiper-slide-next {
-        opacity: 1;
-        transform: translateY(0);
+      // ホバー時のエフェクト
+      &:hover {
+        transform: translateY(-5px) scale(1.02);
+        z-index: 10;
       }
       
       // PCでの2カラム表示時
       @include desktop {
-        &.swiper-slide-active,
-        &.swiper-slide-next {
-          opacity: 1;
-          transform: translateY(0);
+        &:hover {
+          transform: translateY(-8px) scale(1.03);
         }
       }
     }
@@ -364,6 +409,8 @@ p {
     .swiper-pagination {
       bottom: 3rem;
       text-align: center;
+      position: relative;
+      z-index: 5;
       
       &-bullet {
         width: 1rem;
@@ -423,9 +470,11 @@ p {
     border: 1px solid rgba($color-white, 0.1);
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     box-shadow: 0 0.5rem 2rem rgba($color-black, 0.3);
+    z-index: 4;
     
     &::before {
       content: '';
@@ -441,8 +490,8 @@ p {
     }
     
     &:hover {
-      transform: translateY(-1rem) scale(1.02);
-      box-shadow: 0 2rem 4rem rgba($color-black, 0.4);
+      transform: translateY(-0.5rem) scale(1.01);
+      box-shadow: 0 1.5rem 3rem rgba($color-black, 0.4);
       border-color: rgba($color-white, 0.3);
       
       &::before {
@@ -456,6 +505,9 @@ p {
       object-fit: cover;
       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       filter: brightness(0.9) contrast(1.1);
+      display: block; // inline要素の問題を回避
+      position: relative;
+      z-index: 2;
       
       @include desktop {
         height: 32rem;
@@ -463,8 +515,8 @@ p {
     }
 
     &:hover img {
-      transform: scale(1.08);
-      filter: brightness(1) contrast(1.2);
+      transform: scale(1.05);
+      filter: brightness(1) contrast(1.1);
     }
   }
 

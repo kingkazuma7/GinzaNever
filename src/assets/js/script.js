@@ -15,6 +15,9 @@ function initializeFullPage() {
     // タッチデバイス設定
     touchSensitivity: 15,
     
+    // Swiperとの競合を避けるための設定
+    normalScrollElements: '.gallery-slider, .swiper, .swiper-slide, .swiper-wrapper',
+    
     // レスポンシブ設定
     responsiveWidth: 768,
     responsiveHeight: 500,
@@ -29,12 +32,32 @@ function initializeFullPage() {
     // アニメーション設定
     afterLoad: function(origin, destination, direction) {
       animateContent(destination.item);
+      
+      // セクション3（ギャラリー）でSwiperを再初期化
+      if (destination.index === 2) { // 0-indexed
+        setTimeout(() => {
+          if (window.gallerySlider) {
+            window.gallerySlider.update();
+            window.gallerySlider.autoplay.start();
+          } else {
+            initializeGallerySlider();
+          }
+        }, 500);
+      }
     },
 
     // スマートフォンでのスクロール時の挙動
     onLeave: function(origin, destination, direction) {
       if (window.innerWidth <= 768) {
         return true; // スマートフォンでは通常スクロールを許可
+      }
+      
+      // セクション3でのスクロール制御
+      if (origin.index === 2) { // ギャラリーセクションから離脱
+        // Swiperの自動再生を一時停止
+        if (window.gallerySlider && window.gallerySlider.autoplay) {
+          window.gallerySlider.autoplay.stop();
+        }
       }
     }
   };
@@ -86,24 +109,16 @@ function animateContent(section) {
   
   // ギャラリーセクションの特別な処理
   if (section.classList.contains('section3')) {
-    // スライダーのスムーズなアニメーション
-    setTimeout(() => {
-      const slider = section.querySelector('.gallery-slider');
-      if (slider && slider.swiper) {
-        const slides = slider.swiper.slides;
-        slides.forEach((slide, index) => {
-          // 初期状態を設定（透明から開始）
-          slide.style.opacity = '0';
-          slide.style.transform = 'translateY(20px)';
-          
-          setTimeout(() => {
-            slide.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            slide.style.opacity = index < 2 ? '1' : '0.7'; // 最初の2つをアクティブに
-            slide.style.transform = 'translateY(0)';
-          }, index * 150);
-        });
-      }
-    }, 200);
+    // スライダーが既に動作しているので、セクションタイトルのみアニメーション
+    const title = section.querySelector('h2');
+    if (title) {
+      setTimeout(() => {
+        title.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        title.style.opacity = '1';
+        title.style.transform = 'translateY(0)';
+      }, 300);
+    }
+    return;
   }
   
   items.forEach((item, index) => {
@@ -166,26 +181,37 @@ function initializeLazyLoading() {
 
 // ギャラリースライダーの初期化
 function initializeGallerySlider() {
-  // ギャラリースライダー（PC: 2カラム、モバイル: 1カラム）
+  // スライダー要素の存在確認
+  const swiperElement = document.querySelector('.gallery-slider');
+  if (!swiperElement) {
+    console.error('Swiper element not found');
+    return;
+  }
+
+  console.log('Initializing gallery slider...');
+  
+  // fullPage.jsの影響を無効化
+  swiperElement.style.transform = 'none';
+  swiperElement.style.transition = 'none';
+  
+  // ギャラリースライダー（無限スクロール）
   const gallerySlider = new Swiper('.gallery-slider', {
-    slidesPerView: 1,
+    loop: true, // ループ有効
+    slidesPerView: 1, // モバイルで1枚表示
     spaceBetween: 20,
-    loop: true, // 無限スクロール
-    loopAdditionalSlides: 2, // より滑らかなループのために追加スライド
-    speed: 1200, // より滑らかなスピード（1.2秒）
-    effect: 'slide',
+    speed: 4000, // ループの速度（4秒で1周）
+    allowTouchMove: true, // スワイプ有効（ユーザー操作可能）
+    grabCursor: true, // カーソル変更
     
-    // 高級感のあるイージング
+    // fullPage.jsとの競合回避
+    touchStartPreventDefault: false,
+    touchMoveStopPropagation: false,
+    
     autoplay: {
-      delay: 5000, // より余裕のある間隔
-      disableOnInteraction: false,
-      pauseOnMouseEnter: true, // マウスホバーで一時停止
+      delay: 0, // 途切れなくループ
+      disableOnInteraction: false, // ユーザー操作後も自動再生継続
+      pauseOnMouseEnter: false, // マウスホバーでも継続
     },
-    
-    // スムーズなトランジション設定
-    watchSlidesProgress: true,
-    watchSlidesVisibility: true,
-    centeredSlides: false,
     
     // ページネーション
     pagination: {
@@ -198,60 +224,98 @@ function initializeGallerySlider() {
     // レスポンシブ設定
     breakpoints: {
       768: {
-        slidesPerView: 2,
-        spaceBetween: 40, // より広い間隔
-        slidesPerGroup: 2,
-        centeredSlides: false,
+        slidesPerView: 2, // PCで2枚表示
+        spaceBetween: 40,
+        speed: 6000, // PCでは少し遅く
       }
     },
     
     // 高級感のあるスムーズなイベント
     on: {
       init: function() {
+        console.log('Swiper initialized successfully');
+        
         // 初期化フラグをチェック（1度だけ実行）
         if (this.el.dataset.initialized) return;
         this.el.dataset.initialized = 'true';
         
-        // 初期化時のふわっと現れる効果
-        const slides = this.slides;
-        slides.forEach((slide, index) => {
-          slide.style.opacity = '0';
-          slide.style.transform = 'translateY(15px)';
-          setTimeout(() => {
-            slide.style.transition = 'opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            slide.style.opacity = '1';
-            slide.style.transform = 'translateY(0)';
-          }, index * 100);
+        // スライダーを表示状態にする
+        this.el.style.visibility = 'visible';
+        this.el.style.opacity = '1';
+        this.el.style.transform = 'none'; // fullPage.jsの影響を無効化
+        
+        console.log('Slides count:', this.slides.length);
+        
+        // fullPage.jsの影響を各スライドからも除去
+        this.slides.forEach((slide, index) => {
+          slide.style.opacity = '1'; // 確実に表示
+          slide.style.visibility = 'visible';
+          slide.style.display = 'flex';
+          slide.style.position = 'relative';
+          slide.style.transform = 'translateX(0)'; // X軸のみ制御
         });
+        
+        // 自動再生を強制開始
+        if (this.autoplay) {
+          this.autoplay.start();
+        }
       },
       
       slideChange: function() {
         // スライド変更時のスムーズな効果
         const activeSlide = this.slides[this.activeIndex];
         if (activeSlide) {
-          activeSlide.style.transform = 'scale(1.01)';
+          activeSlide.style.transform = 'translateX(0) scale(1.01)';
           setTimeout(() => {
-            activeSlide.style.transform = 'scale(1)';
+            activeSlide.style.transform = 'translateX(0) scale(1)';
           }, 200);
         }
       },
       
       transitionStart: function() {
-        // トランジション開始時
+        // トランジション開始時 - fullPage.jsの影響を除去
         this.slides.forEach(slide => {
-          slide.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          slide.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          // Y軸の変更を防ぐ
+          const currentTransform = slide.style.transform;
+          if (currentTransform && !currentTransform.includes('translateX')) {
+            slide.style.transform = 'translateX(0)';
+          }
         });
+      },
+      
+      // エラーハンドリング
+      beforeInit: function() {
+        console.log('Swiper before init');
+      },
+      
+      afterInit: function() {
+        console.log('Swiper after init');
+        // fullPage.jsに対してSwiper領域を通知
+        if (typeof fullpage_api !== 'undefined') {
+          fullpage_api.setAllowScrolling(true);
+        }
       }
     }
   });
+  
+  // スライダーインスタンスをグローバルに保存（デバッグ用）
+  window.gallerySlider = gallerySlider;
+  
+  return gallerySlider;
 }
 
 // 初期化関数
 function initialize() {
+  // まずfullPage.jsを初期化
   initializeFullPage();
   initializeMobileScroll();
   initializeLazyLoading();
-  initializeGallerySlider();
+  
+  // fullPage.jsの初期化完了を待ってからSwiperを初期化
+  setTimeout(() => {
+    initializeGallerySlider();
+  }, 1500);
   
   // 最初のセクションのアニメーションを実行
   setTimeout(() => {
@@ -259,7 +323,7 @@ function initialize() {
     if (firstSection) {
       animateContent(firstSection);
     }
-  }, 1000);
+  }, 2000);
 }
 
 // DOMContentLoadedイベントで初期化を実行
