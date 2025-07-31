@@ -194,115 +194,33 @@ function initializeGallerySlider() {
   swiperElement.style.transform = 'none';
   swiperElement.style.transition = 'none';
   
-  // ギャラリースライダー（無限スクロール）
-  const gallerySlider = new Swiper('.gallery-slider', {
-    loop: true, // ループ有効
-    slidesPerView: 1, // モバイルで1枚表示
+  // Swiperギャラリーの初期化
+  const gallerySwiper = new Swiper('.gallery-slider', {
+    slidesPerView: 1,
     spaceBetween: 20,
-    speed: 4000, // ループの速度（4秒で1周）
-    allowTouchMove: true, // スワイプ有効（ユーザー操作可能）
-    grabCursor: true, // カーソル変更
-    
-    // fullPage.jsとの競合回避
-    touchStartPreventDefault: false,
-    touchMoveStopPropagation: false,
-    
-    autoplay: {
-      delay: 0, // 途切れなくループ
-      disableOnInteraction: false, // ユーザー操作後も自動再生継続
-      pauseOnMouseEnter: false, // マウスホバーでも継続
-    },
-    
-    // ページネーション
+    loop: true,
+    speed: 600,
+    allowTouchMove: true,
+    autoplay: false,
     pagination: {
       el: '.gallery-slider .swiper-pagination',
       clickable: true,
-      dynamicBullets: true, // ダイナミックドット
-      dynamicMainBullets: 3, // 表示するメインドット数
+      dynamicBullets: false,
     },
-    
-    // レスポンシブ設定
+    navigation: false,
     breakpoints: {
       768: {
-        slidesPerView: 2, // PCで2枚表示
+        slidesPerView: 2,
         spaceBetween: 40,
-        speed: 6000, // PCでは少し遅く
+        speed: 600,
       }
     },
-    
-    // 高級感のあるスムーズなイベント
-    on: {
-      init: function() {
-        console.log('Swiper initialized successfully');
-        
-        // 初期化フラグをチェック（1度だけ実行）
-        if (this.el.dataset.initialized) return;
-        this.el.dataset.initialized = 'true';
-        
-        // スライダーを表示状態にする
-        this.el.style.visibility = 'visible';
-        this.el.style.opacity = '1';
-        this.el.style.transform = 'none'; // fullPage.jsの影響を無効化
-        
-        console.log('Slides count:', this.slides.length);
-        
-        // fullPage.jsの影響を各スライドからも除去
-        this.slides.forEach((slide, index) => {
-          slide.style.opacity = '1'; // 確実に表示
-          slide.style.visibility = 'visible';
-          slide.style.display = 'flex';
-          slide.style.position = 'relative';
-          slide.style.transform = 'translateX(0)'; // X軸のみ制御
-        });
-        
-        // 自動再生を強制開始
-        if (this.autoplay) {
-          this.autoplay.start();
-        }
-      },
-      
-      slideChange: function() {
-        // スライド変更時のスムーズな効果
-        const activeSlide = this.slides[this.activeIndex];
-        if (activeSlide) {
-          activeSlide.style.transform = 'translateX(0) scale(1.01)';
-          setTimeout(() => {
-            activeSlide.style.transform = 'translateX(0) scale(1)';
-          }, 200);
-        }
-      },
-      
-      transitionStart: function() {
-        // トランジション開始時 - fullPage.jsの影響を除去
-        this.slides.forEach(slide => {
-          slide.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-          // Y軸の変更を防ぐ
-          const currentTransform = slide.style.transform;
-          if (currentTransform && !currentTransform.includes('translateX')) {
-            slide.style.transform = 'translateX(0)';
-          }
-        });
-      },
-      
-      // エラーハンドリング
-      beforeInit: function() {
-        console.log('Swiper before init');
-      },
-      
-      afterInit: function() {
-        console.log('Swiper after init');
-        // fullPage.jsに対してSwiper領域を通知
-        if (typeof fullpage_api !== 'undefined') {
-          fullpage_api.setAllowScrolling(true);
-        }
-      }
-    }
   });
   
   // スライダーインスタンスをグローバルに保存（デバッグ用）
-  window.gallerySlider = gallerySlider;
+  window.gallerySlider = gallerySwiper;
   
-  return gallerySlider;
+  return gallerySwiper;
 }
 
 // 初期化関数
