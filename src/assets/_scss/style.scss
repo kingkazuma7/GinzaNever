@@ -114,29 +114,23 @@ p {
   min-height: 100vh;
   padding: 4rem 2rem;
   position: relative;
+  background: rgba($color-dark, 0.98);
+  margin-bottom: 4rem;
+  border-radius: 2rem;
+  box-shadow: 0 4px 32px rgba($color-black, 0.12);
+  overflow: hidden;
   
-  // 要素の初期状態（アニメーション用）
-  h2, p, .btn-more, .contact-info, .social-links {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  
-  // ギャラリーセクションは除外
-  &.section3 {
-    h2 {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    
-    .gallery-slider {
-      opacity: 1 !important;
-      visibility: visible !important;
-      display: block !important;
-    }
+  // セクション間の区切り線
+  & + .section {
+    margin-top: 4rem;
+    border-top: 2px solid rgba($color-white, 0.08);
+    box-shadow: 0 8px 32px rgba($color-black, 0.18);
   }
 
   @include desktop {
     padding: 6rem 2rem;
+    margin-bottom: 6rem;
+    border-radius: 3rem;
   }
 }
 
@@ -660,4 +654,16 @@ p {
   @include desktop {
     display: block !important;
   }
+}
+
+.vertical-swiper,
+.vertical-swiper .swiper-slide {
+  height: 100vh;
+}
+.vertical-swiper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0;
 }

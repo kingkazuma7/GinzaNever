@@ -223,6 +223,44 @@ function initializeGallerySlider() {
   return gallerySwiper;
 }
 
+// 縦方向の全画面Swiper（VerticalPreview）
+const verticalSwiper = new Swiper('.vertical-swiper', {
+  direction: 'vertical',
+  slidesPerView: 1,
+  spaceBetween: 0,
+  mousewheel: true,
+  keyboard: { enabled: true },
+  pagination: {
+    el: '.vertical-swiper > .swiper-pagination',
+    clickable: true,
+  },
+  speed: 900,
+  effect: 'slide',
+});
+
+// ギャラリー（横スライド）はそのまま
+const gallerySwiper = new Swiper('.gallery-slider', {
+  slidesPerView: 1,
+  spaceBetween: 20,
+  loop: true,
+  speed: 600,
+  allowTouchMove: true,
+  autoplay: false,
+  pagination: {
+    el: '.gallery-slider .swiper-pagination',
+    clickable: true,
+    dynamicBullets: false,
+  },
+  navigation: false,
+  breakpoints: {
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 40,
+      speed: 600,
+    }
+  },
+});
+
 // 初期化関数
 function initialize() {
   // まずfullPage.jsを初期化

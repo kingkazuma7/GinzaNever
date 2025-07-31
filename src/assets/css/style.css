@@ -5,7 +5,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Lato", "Noto Sans JP", sans-serif;
+  font-family: "Noto Sans JP", "Lato", sans-serif;
   font-weight: 400;
   font-size: 1.6rem;
   color: #fff;
@@ -15,6 +15,13 @@ body {
 }
 
 h2, h1 {
+  font-family: "Noto Sans JP", "Lato", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+h2.en-title, h1.en-title {
   font-family: "Lato", "Noto Sans JP", sans-serif;
   font-weight: 300;
   letter-spacing: 0.1em;
@@ -30,7 +37,6 @@ h1 {
     font-size: 4rem;
   }
 }
-
 h2 {
   font-size: 1.8rem;
   margin-bottom: 3rem;
@@ -40,12 +46,12 @@ h2 {
     font-size: 2.5rem;
   }
 }
-
 p {
   font-size: 1.6rem;
   line-height: 1.8;
   margin-bottom: 2rem;
   letter-spacing: 0.05em;
+  font-family: "Noto Sans JP", "Lato", sans-serif;
 }
 @media (min-width: 769px) {
   p {
@@ -55,11 +61,16 @@ p {
 p.lead {
   font-size: 1.8rem;
   font-weight: 300;
+  font-family: "Lato", "Noto Sans JP", sans-serif;
 }
 @media (min-width: 769px) {
   p.lead {
     font-size: 2rem;
   }
+}
+p.jp-text {
+  font-family: "Noto Sans JP", "Lato", sans-serif;
+  letter-spacing: 0.1em;
 }
 
 .section {
@@ -71,14 +82,22 @@ p.lead {
   min-height: 100vh;
   padding: 4rem 2rem;
   position: relative;
+  background: rgba(10, 10, 10, 0.98);
+  margin-bottom: 4rem;
+  border-radius: 2rem;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
 }
-.section h2, .section p, .section .gallery-item, .section .btn-more, .section .contact-info, .section .social-links {
-  opacity: 0;
-  transform: translateY(20px);
+.section + .section {
+  margin-top: 4rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 }
 @media (min-width: 769px) {
   .section {
     padding: 6rem 2rem;
+    margin-bottom: 6rem;
+    border-radius: 3rem;
   }
 }
 
@@ -247,6 +266,20 @@ p.lead {
 .section3 {
   background-color: #0a0a0a;
 }
+.section3 .gallery-slider {
+  position: relative !important;
+  transform: none !important;
+  transition: none !important;
+}
+.section3 .gallery-slider * {
+  position: relative;
+  transform: none !important;
+  transition: transform 0.3s ease, opacity 0.3s ease !important;
+}
+.section3 .swiper-slide {
+  transform: translateX(0) !important;
+  transition: transform 0.3s ease !important;
+}
 
 .section4 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("/src/assets/images/TS--35.jpg");
@@ -256,6 +289,8 @@ p.lead {
   max-width: 100rem;
   margin: 0 auto;
   padding: 0 2rem;
+  position: relative;
+  z-index: 1;
 }
 @media (min-width: 769px) {
   .gallery-container {
@@ -264,33 +299,46 @@ p.lead {
 }
 .gallery-slider {
   width: 100%;
+  height: auto;
   padding-bottom: 8rem;
-  overflow: hidden;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+  visibility: visible;
+  opacity: 1;
 }
 .gallery-slider .swiper-wrapper {
   align-items: stretch;
-  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-timing-function: linear;
+  display: flex;
+  height: auto;
+  visibility: visible;
 }
 .gallery-slider .swiper-slide {
   height: auto;
-  display: flex;
-  opacity: 0;
-  transform: translateY(15px);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.gallery-slider .swiper-slide.swiper-slide-active, .gallery-slider .swiper-slide.swiper-slide-next {
-  opacity: 1;
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
   transform: translateY(0);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+}
+.gallery-slider .swiper-slide:hover {
+  transform: translateY(-5px) scale(1.02);
+  z-index: 10;
 }
 @media (min-width: 769px) {
-  .gallery-slider .swiper-slide.swiper-slide-active, .gallery-slider .swiper-slide.swiper-slide-next {
-    opacity: 1;
-    transform: translateY(0);
+  .gallery-slider .swiper-slide:hover {
+    transform: translateY(-8px) scale(1.03);
   }
 }
 .gallery-slider .swiper-pagination {
   bottom: 3rem;
   text-align: center;
+  position: relative;
+  z-index: 5;
 }
 .gallery-slider .swiper-pagination-bullet {
   width: 1rem;
@@ -341,9 +389,11 @@ p.lead {
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
+  z-index: 4;
 }
 .gallery-item::before {
   content: "";
@@ -358,8 +408,8 @@ p.lead {
   z-index: 1;
 }
 .gallery-item:hover {
-  transform: translateY(-1rem) scale(1.02);
-  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.4);
+  transform: translateY(-0.5rem) scale(1.01);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.4);
   border-color: rgba(255, 255, 255, 0.3);
 }
 .gallery-item:hover::before {
@@ -371,6 +421,9 @@ p.lead {
   object-fit: cover;
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   filter: brightness(0.9) contrast(1.1);
+  display: block;
+  position: relative;
+  z-index: 2;
 }
 @media (min-width: 769px) {
   .gallery-item img {
@@ -378,8 +431,8 @@ p.lead {
   }
 }
 .gallery-item:hover img {
-  transform: scale(1.08);
-  filter: brightness(1) contrast(1.2);
+  transform: scale(1.05);
+  filter: brightness(1) contrast(1.1);
 }
 .gallery-caption {
   padding: 2.5rem;
@@ -412,6 +465,7 @@ p.lead {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   position: relative;
+  font-family: "Lato", "Noto Sans JP", sans-serif;
 }
 @media (min-width: 769px) {
   .gallery-caption h3 {
@@ -436,6 +490,7 @@ p.lead {
   line-height: 1.8;
   font-weight: 300;
   letter-spacing: 0.05em;
+  font-family: "Noto Sans JP", "Lato", sans-serif;
 }
 @media (min-width: 769px) {
   .gallery-caption p {
@@ -453,17 +508,20 @@ p.lead {
 .contact-info {
   text-align: center;
   margin: 1rem 0;
+  font-family: "Noto Sans JP", "Lato", sans-serif;
 }
 .contact-info .en-address {
   display: block;
   font-size: 1.4rem;
   color: rgba(255, 255, 255, 0.8);
   margin-top: 0.5rem;
+  font-family: "Lato", "Noto Sans JP", sans-serif;
 }
 .contact-info .contact-message {
   font-size: 1.4rem;
   color: rgba(255, 255, 255, 0.9);
   margin: 1.5rem 0;
+  font-family: "Noto Sans JP", "Lato", sans-serif;
 }
 .contact-info a {
   color: #fff;
@@ -503,6 +561,19 @@ p.lead {
   #fp-nav {
     display: block !important;
   }
+}
+
+.vertical-swiper,
+.vertical-swiper .swiper-slide {
+  height: 100vh;
+}
+
+.vertical-swiper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

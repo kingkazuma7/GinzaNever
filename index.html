@@ -42,158 +42,141 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <!-- Import CSS -->
-<link href="https://cdn.jsdelivr.net/npm/fullpage.js@4.0.29/dist/fullpage.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <link rel="stylesheet" href="/src/assets/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-
-<div id="fullpage">
-  <!-- セクション1: メインビジュアル -->
-  <div class="section section1">
-    <div class="content">
-      <div class="logo">
-        <svg viewBox="0 0 200 60" class="logo-svg">
-          <defs>
-            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#e0e0e0;stop-opacity:0.8" />
-            </linearGradient>
-          </defs>
-          
-          <!-- シンプルなロゴデザイン -->
-          <g class="logo-main">
-            <!-- 左右のライン -->
-            <line x1="20" y1="30" x2="60" y2="30" stroke="url(#logoGradient)" stroke-width="2" class="logo-line left-line"/>
-            <line x1="140" y1="30" x2="180" y2="30" stroke="url(#logoGradient)" stroke-width="2" class="logo-line right-line"/>
-            
-            <!-- 中央のダイヤモンド -->
-            <polygon points="100,15 115,30 100,45 85,30" fill="url(#logoGradient)" class="logo-diamond"/>
-            
-            <!-- 装飾ドット -->
-            <circle cx="70" cy="30" r="1.5" fill="url(#logoGradient)" class="logo-dot left-dot"/>
-            <circle cx="130" cy="30" r="1.5" fill="url(#logoGradient)" class="logo-dot right-dot"/>
-          </g>
-        </svg>
+  <div class="swiper vertical-swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide section1">
+        <div class="content">
+          <div class="logo">
+            <svg viewBox="0 0 200 60" class="logo-svg">
+              <defs>
+                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#e0e0e0;stop-opacity:0.8" />
+                </linearGradient>
+              </defs>
+              <g class="logo-main">
+                <line x1="20" y1="30" x2="60" y2="30" stroke="url(#logoGradient)" stroke-width="2" class="logo-line left-line"/>
+                <line x1="140" y1="30" x2="180" y2="30" stroke="url(#logoGradient)" stroke-width="2" class="logo-line right-line"/>
+                <polygon points="100,15 115,30 100,45 85,30" fill="url(#logoGradient)" class="logo-diamond"/>
+                <circle cx="70" cy="30" r="1.5" fill="url(#logoGradient)" class="logo-dot left-dot"/>
+                <circle cx="130" cy="30" r="1.5" fill="url(#logoGradient)" class="logo-dot right-dot"/>
+              </g>
+            </svg>
+          </div>
+          <h1 class="main-title">Ginza Never</h1>
+        </div>
       </div>
-      
-      <h1 class="main-title">Ginza Never</h1>
-    </div>
-  </div>
-
-  <!-- セクション2: コンセプト -->
-  <div class="section section2">
-    <div class="content">
-      <h2 class="en-title">Concept</h2>
-      <p class="jp-text">上質な空間で過ごす特別なひととき</p>
-      <p class="jp-text">洗練された雰囲気の中で、贅沢なくつろぎのひとときをお過ごしください。</p>
-    </div>
-  </div>
-
-  <!-- セクション3: ギャラリー -->
-  <div class="section section3">
-    <div class="content">
-      <h2 class="en-title">Gallery</h2>
-      <div class="gallery-container">
-        <!-- ギャラリースライダー -->
-        <div class="gallery-slider swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="gallery-item">
-                <img src="/src/assets/images/TS--2.jpg" alt="カウンター">
-                <div class="gallery-caption">
-                  <h3>Counter</h3>
-                  <p>落ち着いた雰囲気のカウンター席</p>
+      <div class="swiper-slide section2">
+        <div class="content">
+          <h2 class="en-title">Concept</h2>
+          <p class="jp-text">上質な空間で過ごす特別なひととき</p>
+          <p class="jp-text">洗練された雰囲気の中で、贅沢なくつろぎのひとときをお過ごしください。</p>
+        </div>
+      </div>
+      <div class="swiper-slide section3">
+        <div class="content">
+          <h2 class="en-title">Gallery</h2>
+          <div class="gallery-container">
+            <div class="gallery-slider swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="gallery-item">
+                    <img src="/src/assets/images/TS--2.jpg" alt="カウンター">
+                    <div class="gallery-caption">
+                      <h3>Counter</h3>
+                      <p>落ち着いた雰囲気のカウンター席</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="gallery-item">
+                    <img src="/src/assets/images/TS--5.jpg" alt="ソファー席">
+                    <div class="gallery-caption">
+                      <h3>Sofa Seats</h3>
+                      <p>ゆったりとくつろげるソファー席</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="gallery-item">
+                    <img src="/src/assets/images/TS--15.jpg" alt="ゴルフシミュレーター">
+                    <div class="gallery-caption">
+                      <h3>Golf Simulator</h3>
+                      <p>本格的なゴルフシミュレーター完備</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="gallery-item">
+                    <img src="/src/assets/images/TS--3.jpg" alt="VIPルーム">
+                    <div class="gallery-caption">
+                      <h3>VIP Room</h3>
+                      <p>プライベートな空間</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="gallery-item">
+                    <img src="/src/assets/images/TS--7.jpg" alt="バーカウンター">
+                    <div class="gallery-caption">
+                      <h3>Bar Counter</h3>
+                      <p>上質なバーカウンター</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="gallery-item">
+                    <img src="/src/assets/images/TS--11.jpg" alt="ラウンジエリア">
+                    <div class="gallery-caption">
+                      <h3>Lounge Area</h3>
+                      <p>リラックスできるラウンジエリア</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="gallery-item">
-                <img src="/src/assets/images/TS--5.jpg" alt="ソファー席">
-                <div class="gallery-caption">
-                  <h3>Sofa Seats</h3>
-                  <p>ゆったりとくつろげるソファー席</p>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="gallery-item">
-                <img src="/src/assets/images/TS--15.jpg" alt="ゴルフシミュレーター">
-                <div class="gallery-caption">
-                  <h3>Golf Simulator</h3>
-                  <p>本格的なゴルフシミュレーター完備</p>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="gallery-item">
-                <img src="/src/assets/images/TS--3.jpg" alt="VIPルーム">
-                <div class="gallery-caption">
-                  <h3>VIP Room</h3>
-                  <p>プライベートな空間</p>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="gallery-item">
-                <img src="/src/assets/images/TS--7.jpg" alt="バーカウンター">
-                <div class="gallery-caption">
-                  <h3>Bar Counter</h3>
-                  <p>上質なバーカウンター</p>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="gallery-item">
-                <img src="/src/assets/images/TS--11.jpg" alt="ラウンジエリア">
-                <div class="gallery-caption">
-                  <h3>Lounge Area</h3>
-                  <p>リラックスできるラウンジエリア</p>
-                </div>
-              </div>
+              <div class="swiper-pagination"></div>
             </div>
           </div>
-          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="swiper-slide section4">
+        <div class="content">
+          <h2 class="en-title">Information</h2>
+          <div class="info-container">
+            <div class="contact-info">
+              <p>
+                <i class="fas fa-map-marker-alt"></i>
+                東京都中央区銀座7-5-15 AG1ビル1F<br>
+                <span class="en-address">7-5-15, Ginza, Chuo-Ku, Tokyo 104-0061</span>
+              </p>
+              <p class="contact-message">
+                ご予約、お問い合わせはお電話又はDMにて承ります
+              </p>
+              <p>
+                <i class="fas fa-phone"></i>
+                <a href="tel:03-6280-6563">03-6280-6563</a>
+              </p>
+            </div>
+            <div class="social-links">
+              <a href="https://www.instagram.com/ginzanever" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <div class="swiper-pagination"></div>
   </div>
-
-  <!-- セクション4: 基本情報 -->
-  <div class="section section4">
-    <div class="content">
-      <h2 class="en-title">Information</h2>
-      <div class="info-container">
-        <div class="contact-info">
-          <p>
-            <i class="fas fa-map-marker-alt"></i>
-            東京都中央区銀座7-5-15 AG1ビル1F<br>
-            <span class="en-address">7-5-15, Ginza, Chuo-Ku, Tokyo 104-0061</span>
-          </p>
-          <p class="contact-message">
-            ご予約、お問い合わせはお電話又はDMにて承ります
-          </p>
-          <p>
-            <i class="fas fa-phone"></i>
-            <a href="tel:03-6280-6563">03-6280-6563</a>
-          </p>
-        </div>
-        <div class="social-links">
-          <a href="https://www.instagram.com/ginzanever" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Import JS -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="/src/assets/js/script.js"></script>
-
+  <!-- Import JS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="/src/assets/js/script.js"></script>
 </body>
 </html> 
