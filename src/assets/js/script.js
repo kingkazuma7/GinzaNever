@@ -63,38 +63,37 @@ function animateContent(section) {
   
   // ギャラリーセクションの特別な処理
   if (section.classList.contains('section3')) {
-    // スライダーの再初期化とスムーズなアニメーション
+    // スライダーのスムーズなアニメーション
     setTimeout(() => {
       const slider = section.querySelector('.gallery-slider');
       if (slider && slider.swiper) {
-        // スライダーのアニメーション効果を再トリガー
         const slides = slider.swiper.slides;
         slides.forEach((slide, index) => {
+          // 初期状態を設定（透明から開始）
           slide.style.opacity = '0';
-          slide.style.transform = 'translateY(30px) scale(0.9)';
+          slide.style.transform = 'translateY(20px)';
+          
           setTimeout(() => {
-            slide.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            slide.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             slide.style.opacity = index < 2 ? '1' : '0.7'; // 最初の2つをアクティブに
-            slide.style.transform = index < 2 ? 'translateY(0) scale(1)' : 'translateY(0) scale(0.95)';
-          }, index * 200);
+            slide.style.transform = 'translateY(0)';
+          }, index * 150);
         });
       }
-    }, 300);
+    }, 200);
   }
   
   items.forEach((item, index) => {
-    // 初期状態をリセット
+    // 初期状態を設定（透明から開始）
     item.style.opacity = '0';
-    item.style.transform = 'translateY(30px)';
-    item.style.filter = 'blur(5px)';
+    item.style.transform = 'translateY(20px)';
     
-    // 段階的にアニメーション
+    // ふわっと現れるアニメーション
     setTimeout(() => {
-      item.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      item.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
       item.style.opacity = '1';
       item.style.transform = 'translateY(0)';
-      item.style.filter = 'blur(0)';
-    }, index * 150 + 200);
+    }, index * 100 + 150);
   });
 }
 
@@ -190,16 +189,16 @@ function initializeGallerySlider() {
         if (this.el.dataset.initialized) return;
         this.el.dataset.initialized = 'true';
         
-        // 初期化時のフェードイン効果
+        // 初期化時のふわっと現れる効果
         const slides = this.slides;
         slides.forEach((slide, index) => {
           slide.style.opacity = '0';
-          slide.style.transform = 'translateY(20px)';
+          slide.style.transform = 'translateY(15px)';
           setTimeout(() => {
-            slide.style.transition = 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            slide.style.transition = 'opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             slide.style.opacity = '1';
             slide.style.transform = 'translateY(0)';
-          }, index * 150);
+          }, index * 100);
         });
       },
       
@@ -207,10 +206,10 @@ function initializeGallerySlider() {
         // スライド変更時のスムーズな効果
         const activeSlide = this.slides[this.activeIndex];
         if (activeSlide) {
-          activeSlide.style.transform = 'scale(1.02)';
+          activeSlide.style.transform = 'scale(1.01)';
           setTimeout(() => {
             activeSlide.style.transform = 'scale(1)';
-          }, 300);
+          }, 200);
         }
       },
       

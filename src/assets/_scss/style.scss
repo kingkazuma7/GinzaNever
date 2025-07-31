@@ -83,13 +83,22 @@ p {
 // セクションのスタイル
 .section {
   text-align: center;
+  color: $color-white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
-  height: auto;
-  padding: 6rem 1.5rem;
-  background-color: $color-black;
+  padding: 4rem 2rem;
+  position: relative;
+  
+  // 要素の初期状態（アニメーション用）
+  h2, p, .gallery-item, .btn-more, .contact-info, .social-links {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
   @include desktop {
-    padding: 2rem;
+    padding: 6rem 2rem;
   }
 }
 
@@ -154,14 +163,14 @@ p {
     .swiper-slide {
       height: auto;
       display: flex;
-      opacity: 0.7; // 非アクティブスライドを少し透明に
-      transform: scale(0.95); // 非アクティブスライドを少し小さく
+      opacity: 0; // 初期状態（アニメーション用）
+      transform: translateY(15px); // 初期状態（アニメーション用）
       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       
       &.swiper-slide-active,
       &.swiper-slide-next {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(0);
       }
       
       // PCでの2カラム表示時
@@ -169,7 +178,7 @@ p {
         &.swiper-slide-active,
         &.swiper-slide-next {
           opacity: 1;
-          transform: scale(1);
+          transform: translateY(0);
         }
       }
     }

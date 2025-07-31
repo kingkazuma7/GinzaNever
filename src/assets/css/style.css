@@ -64,14 +64,21 @@ p.lead {
 
 .section {
   text-align: center;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
-  height: auto;
-  padding: 6rem 1.5rem;
-  background-color: #000;
+  padding: 4rem 2rem;
+  position: relative;
+}
+.section h2, .section p, .section .gallery-item, .section .btn-more, .section .contact-info, .section .social-links {
+  opacity: 0;
+  transform: translateY(20px);
 }
 @media (min-width: 769px) {
   .section {
-    padding: 2rem;
+    padding: 6rem 2rem;
   }
 }
 
@@ -129,18 +136,18 @@ p.lead {
 .gallery-slider .swiper-slide {
   height: auto;
   display: flex;
-  opacity: 0.7;
-  transform: scale(0.95);
+  opacity: 0;
+  transform: translateY(15px);
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .gallery-slider .swiper-slide.swiper-slide-active, .gallery-slider .swiper-slide.swiper-slide-next {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0);
 }
 @media (min-width: 769px) {
   .gallery-slider .swiper-slide.swiper-slide-active, .gallery-slider .swiper-slide.swiper-slide-next {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
 }
 .gallery-slider .swiper-pagination {
