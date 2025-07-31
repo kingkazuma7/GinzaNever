@@ -1,123 +1,157 @@
-// フォント設定
-$font-family-base: 'Lato', 'Noto Sans JP', sans-serif;
-$font-weight-light: 300;
-$font-weight-normal: 400;
-$font-weight-medium: 500;
-$font-weight-bold: 700;
+// 変数定義
+$font-family-base: "Lato", "Noto Sans JP", sans-serif;
+$color-white: #fff;
+$color-black: #000;
+$color-dark: #0a0a0a;
 
-/* 基本スタイル */
+// ブレイクポイント
+$breakpoint-desktop: 769px;
+
+// ミックスイン
+@mixin desktop {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+// 基本スタイル - スマートフォンファースト
 body {
   margin: 0;
   padding: 0;
   font-family: $font-family-base;
-  font-weight: $font-weight-normal;
-  color: #fff;
-  background: #000;
+  font-weight: 400;
+  color: $color-white;
+  background: $color-black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 見出しスタイル */
-h1, h2, h3, h4, h5, h6 {
+// 見出しスタイル
+%heading-base {
   font-family: $font-family-base;
-  font-weight: $font-weight-light;
+  font-weight: 300;
   letter-spacing: 0.1em;
-}
-
-/* セクションのスタイル */
-.section {
-  text-align: center;
-  padding: 20px;
-  background-color: #000;
-}
-
-/* メインビジュアル */
-.section1 {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url('/src/assets/images/main-visual.jpg') center/cover;
-}
-
-/* コンセプト */
-.section2 {
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-              url('/src/assets/images/concept.jpg') center/cover;
-}
-
-/* ギャラリー */
-.section3 {
-  background-color: #0a0a0a;
-}
-
-/* 基本情報 */
-.section4 {
-  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-              url('/src/assets/images/footer-bg.jpg') center/cover;
-}
-
-/* コンテンツのスタイル */
-.content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
 }
 
 h1 {
-  font-size: 4em;
-  margin-bottom: 20px;
-  font-weight: $font-weight-light;
-  letter-spacing: 0.1em;
-}
-
-h2 {
+  @extend %heading-base;
   font-size: 2.5em;
-  margin-bottom: 30px;
-  font-weight: $font-weight-light;
-  letter-spacing: 0.1em;
-}
+  margin-bottom: 20px;
 
-p {
-  font-size: 1.2em;
-  line-height: 2;
-  margin-bottom: 30px;
-  letter-spacing: 0.05em;
-  font-weight: $font-weight-normal;
-
-  &.lead {
-    font-size: 1.4em;
-    font-weight: $font-weight-light;
+  @include desktop {
+    font-size: 4em;
   }
 }
 
-/* ギャラリーグリッド */
+h2 {
+  @extend %heading-base;
+  font-size: 1.8em;
+  margin-bottom: 30px;
+
+  @include desktop {
+    font-size: 2.5em;
+  }
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+
+  @include desktop {
+    font-size: 1.2em;
+  }
+
+  &.lead {
+    font-size: 1.2em;
+    font-weight: 300;
+
+    @include desktop {
+      font-size: 1.4em;
+    }
+  }
+}
+
+// セクションのスタイル
+.section {
+  text-align: center;
+  min-height: 100vh;
+  height: auto;
+  padding: 60px 15px;
+  background-color: $color-black;
+
+  @include desktop {
+    padding: 20px;
+  }
+}
+
+// コンテンツのスタイル
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+
+  @include desktop {
+    padding: 20px;
+  }
+}
+
+// 背景画像を持つセクション
+%section-with-bg {
+  background-position: center;
+  background-size: cover;
+}
+
+.section1 {
+  @extend %section-with-bg;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/assets/images/TS--10.jpg");
+}
+
+.section2 {
+  @extend %section-with-bg;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/src/assets/images/TS--25.jpg");
+}
+
+.section3 {
+  background-color: $color-dark;
+}
+
+.section4 {
+  @extend %section-with-bg;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("/src/assets/images/TS--35.jpg");
+}
+
+// ギャラリーグリッド
 .gallery {
   &-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px;
+
+    @include desktop {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
   }
 
   &-item {
     position: relative;
     overflow: hidden;
     border-radius: 5px;
-    aspect-ratio: 16/9;
+    aspect-ratio: 4/3;
+
+    @include desktop {
+      aspect-ratio: 16/9;
+    }
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.3s ease;
-    }
-
-    &:hover {
-      img {
-        transform: scale(1.05);
-      }
-
-      .gallery-caption {
-        opacity: 1;
-      }
     }
   }
 
@@ -126,85 +160,92 @@ p {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 20px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    color: #fff;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    padding: 15px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: $color-white;
+    opacity: 1;
+
+    @include desktop {
+      padding: 20px;
+    }
 
     h3 {
-      font-size: 1.4em;
-      margin-bottom: 10px;
-      font-weight: $font-weight-light;
+      @extend %heading-base;
+      font-size: 1.2em;
+      margin-bottom: 5px;
+
+      @include desktop {
+        font-size: 1.4em;
+        margin-bottom: 10px;
+      }
     }
 
     p {
-      font-size: 1em;
+      font-size: 0.9em;
       margin-bottom: 0;
+
+      @include desktop {
+        font-size: 1em;
+      }
     }
   }
 }
 
-/* 情報セクション */
+// 情報セクション
 .info {
   &-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
   }
 }
 
+// コンタクト情報
 .contact-info {
   text-align: center;
-  margin: 20px 0;
+  margin: 10px 0;
 
   a {
-    color: #fff;
+    color: $color-white;
     text-decoration: none;
     transition: color 0.3s;
-    font-weight: $font-weight-normal;
+    font-weight: 400;
 
-    &:hover {
-      color: #c4a046;
+    &:focus {
+      outline: 2px solid $color-white;
+      outline-offset: 2px;
     }
   }
 }
 
+// ソーシャルリンク
 .social-links {
-  margin-top: 30px;
+  margin-top: 20px;
 
   a {
-    color: #fff;
-    font-size: 2em;
-    margin: 0 15px;
+    color: $color-white;
+    font-size: 1.8em;
+    margin: 0 10px;
     transition: color 0.3s;
 
-    &:hover {
-      color: #c4a046;
+    @include desktop {
+      font-size: 2em;
+      margin: 0 15px;
+    }
+
+    &:focus {
+      outline: 2px solid $color-white;
+      outline-offset: 2px;
     }
   }
 }
 
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-  h1 { 
-    font-size: 2.5em; 
-  }
-  
-  h2 { 
-    font-size: 1.8em; 
-  }
-  
-  p { 
-    font-size: 1em; 
+// ナビゲーション
+#fp-nav {
+  display: none !important;
 
-    &.lead {
-      font-size: 1.2em;
-    }
-  }
-  
-  .gallery-grid {
-    grid-template-columns: 1fr;
+  @include desktop {
+    display: block !important;
   }
 }

@@ -45,31 +45,24 @@
       <h2>Gallery</h2>
       <div class="gallery-grid">
         <div class="gallery-item">
-          <img src="/src/assets/images/counter.jpg" alt="カウンター">
+          <img src="/src/assets/images/TS--2.jpg" alt="カウンター">
           <div class="gallery-caption">
             <h3>Counter</h3>
             <p>落ち着いた雰囲気のカウンター席</p>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="/src/assets/images/sofa.jpg" alt="ソファー席">
+          <img src="/src/assets/images/TS--5.jpg" alt="ソファー席">
           <div class="gallery-caption">
             <h3>Sofa Seats</h3>
             <p>ゆったりとくつろげるソファー席</p>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="/src/assets/images/golf.jpg" alt="ゴルフシミュレーター">
+          <img src="/src/assets/images/TS--15.jpg" alt="ゴルフシミュレーター">
           <div class="gallery-caption">
             <h3>Golf Simulator</h3>
             <p>本格的なゴルフシミュレーター完備</p>
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="/src/assets/images/karaoke.jpg" alt="カラオケ">
-          <div class="gallery-caption">
-            <h3>Karaoke</h3>
-            <p>プライベート空間でのカラオケ</p>
           </div>
         </div>
       </div>
@@ -104,31 +97,7 @@
 <!-- Import JS -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
-<script>
-new fullpage('#fullpage', {
-  // 基本設定
-  licenseKey: 'YOUR_KEY_HERE',
-  navigation: true,
-  navigationPosition: 'right',
-  
-  // スクロール設定
-  scrollingSpeed: 1000,
-  autoScrolling: true,
-  fitToSection: true,
-  
-  // レスポンシブ設定
-  responsiveWidth: 768,
-  
-  // アニメーション設定
-  afterLoad: function(origin, destination, direction) {
-    const currentSection = destination.item;
-    currentSection.querySelectorAll('.content').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-    });
-  }
-});
-</script>
+<script src="/src/assets/js/script.js"></script>
 
 </body>
 </html> 
