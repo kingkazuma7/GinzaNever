@@ -59,6 +59,29 @@ function animateContent(section) {
   // アニメーション済みとしてマーク
   animatedSections.add(sectionIndex);
   
+  // セクション1の特別な処理（ロゴとタイトル）
+  if (section.classList.contains('section1')) {
+    const logo = section.querySelector('.logo');
+    const title = section.querySelector('.main-title');
+    
+    if (logo) {
+      setTimeout(() => {
+        logo.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        logo.style.opacity = '1';
+        logo.style.transform = 'translateY(0)';
+      }, 400);
+    }
+    
+    if (title) {
+      setTimeout(() => {
+        title.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        title.style.opacity = '1';
+        title.style.transform = 'translateY(0)';
+      }, 900);
+    }
+    return;
+  }
+  
   const items = section.querySelectorAll('.gallery-item, h2, p, .btn-more, .contact-info, .social-links');
   
   // ギャラリーセクションの特別な処理

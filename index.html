@@ -53,9 +53,32 @@
   <!-- セクション1: メインビジュアル -->
   <div class="section section1">
     <div class="content">
-      <h1>Ginza Never</h1>
-      <p class="lead">Private Golf & Karaoke Lounge</p>
-      <p>銀座のプライベートラウンジ</p>
+      <div class="logo">
+        <svg viewBox="0 0 200 60" class="logo-svg">
+          <defs>
+            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#e0e0e0;stop-opacity:0.8" />
+            </linearGradient>
+          </defs>
+          
+          <!-- シンプルなロゴデザイン -->
+          <g class="logo-main">
+            <!-- 左右のライン -->
+            <line x1="20" y1="30" x2="60" y2="30" stroke="url(#logoGradient)" stroke-width="2" class="logo-line left-line"/>
+            <line x1="140" y1="30" x2="180" y2="30" stroke="url(#logoGradient)" stroke-width="2" class="logo-line right-line"/>
+            
+            <!-- 中央のダイヤモンド -->
+            <polygon points="100,15 115,30 100,45 85,30" fill="url(#logoGradient)" class="logo-diamond"/>
+            
+            <!-- 装飾ドット -->
+            <circle cx="70" cy="30" r="1.5" fill="url(#logoGradient)" class="logo-dot left-dot"/>
+            <circle cx="130" cy="30" r="1.5" fill="url(#logoGradient)" class="logo-dot right-dot"/>
+          </g>
+        </svg>
+      </div>
+      
+      <h1 class="main-title">Ginza Never</h1>
     </div>
   </div>
 

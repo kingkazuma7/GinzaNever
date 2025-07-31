@@ -122,6 +122,160 @@ p {
 .section1 {
   @extend %section-with-bg;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/assets/images/TS--10.jpg");
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    
+    @include desktop {
+      gap: 4rem;
+    }
+  }
+}
+
+// シンプルなロゴスタイル
+.logo {
+  opacity: 0;
+  transform: translateY(30px);
+  
+  &-svg {
+    width: 20rem;
+    height: 6rem;
+    
+    @include desktop {
+      width: 30rem;
+      height: 9rem;
+    }
+  }
+  
+  &-main {
+    animation: logoGlow 4s ease-in-out infinite alternate;
+  }
+  
+  &-line {
+    animation: lineExtend 3s ease-in-out infinite alternate;
+    
+    &.left-line {
+      animation-delay: 0.5s;
+    }
+    
+    &.right-line {
+      animation-delay: 1s;
+    }
+  }
+  
+  &-diamond {
+    animation: diamondRotate 6s linear infinite;
+    transform-origin: center;
+  }
+  
+  &-dot {
+    animation: dotPulse 2s ease-in-out infinite alternate;
+    
+    &.left-dot {
+      animation-delay: 0.3s;
+    }
+    
+    &.right-dot {
+      animation-delay: 0.8s;
+    }
+  }
+}
+
+// スタイリッシュなメインタイトル
+.main-title {
+  font-family: $font-family-base;
+  font-size: 3.5rem;
+  font-weight: 100;
+  color: $color-white;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  position: relative;
+  
+  @include desktop {
+    font-size: 5.5rem;
+    letter-spacing: 0.4em;
+  }
+  
+  // 装飾的なアンダーライン
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    width: 6rem;
+    height: 0.1rem;
+    background: linear-gradient(90deg, transparent, rgba($color-white, 0.8), transparent);
+    transform: translateX(-50%);
+    animation: underlineGlow 3s ease-in-out infinite alternate;
+    
+    @include desktop {
+      width: 10rem;
+      bottom: -1.5rem;
+    }
+  }
+}
+
+// アニメーション定義
+@keyframes logoGlow {
+  0% {
+    filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 0 2.5rem rgba(255, 255, 255, 0.7));
+  }
+}
+
+@keyframes lineExtend {
+  0% {
+    stroke-dasharray: 0 40;
+    opacity: 0.6;
+  }
+  100% {
+    stroke-dasharray: 40 0;
+    opacity: 1;
+  }
+}
+
+@keyframes diamondRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes dotPulse {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes underlineGlow {
+  0% {
+    opacity: 0.5;
+    box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 1.5rem rgba(255, 255, 255, 0.6);
+  }
 }
 
 .section2 {
