@@ -244,6 +244,19 @@ p {
   text-align: center;
   margin: 1rem 0;
 
+  .en-address {
+    display: block;
+    font-size: 1.4rem;
+    color: rgba($color-white, 0.8);
+    margin-top: 0.5rem;
+  }
+
+  .contact-message {
+    font-size: 1.4rem;
+    color: rgba($color-white, 0.9);
+    margin: 1.5rem 0;
+  }
+
   a {
     color: $color-white;
     text-decoration: none;
