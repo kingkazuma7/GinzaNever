@@ -1,3 +1,5 @@
+@import "./reset.scss";
+
 // 変数定義
 $font-family-base: "Lato", "Noto Sans JP", sans-serif;
 $font-family-jp: "Noto Sans JP", "Lato", sans-serif;
@@ -320,6 +322,49 @@ p {
   align-items: center;
   justify-content: center;
   // ギャラリーのスタイルをここに記述
+  .gallery-container {
+    display: grid;
+    grid-template-areas:
+      "img1 img2"
+      "img1 img3";
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    height: 80vh;
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 10rem;
+    gap: 1em;
+    
+    @media screen and (max-width: 768px) {
+      height: 60vh;
+      padding: 0 2rem;
+    }
+
+    @media screen and (max-width: 480px) {
+      height: 50vh;
+      padding: 0 1rem;
+    }
+    
+    // figure {
+    //   margin: 0;
+    //   padding: 0;
+    //   border: none;
+    // }
+
+    .gallery-img01 {
+      grid-area: img1;
+    }
+
+    .gallery-img02 {
+      grid-area: img2;
+    }
+
+    .gallery-img03 {
+      grid-area: img3;
+    }
+  }
 }
 
 .section4 {
