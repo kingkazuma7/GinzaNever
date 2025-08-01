@@ -346,12 +346,6 @@ p {
       height: 50vh;
       padding: 0 1rem;
     }
-    
-    // figure {
-    //   margin: 0;
-    //   padding: 0;
-    //   border: none;
-    // }
 
     .gallery-img01 {
       grid-area: img1;
@@ -363,6 +357,33 @@ p {
 
     .gallery-img03 {
       grid-area: img3;
+    }
+  }
+
+  p {
+    text-align: center;
+    .btn-more {
+      margin: 2rem auto 0;
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      color: $color-white;
+      text-decoration: none;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+      text-align: center;
+  
+      &:hover {
+        background: rgba($color-white, 0.1);
+      }
+  
+      &::after {
+        content: "\f054";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900; // Font Awesome Solidアイコン用の必須font-weight
+        display: inline-block;
+        margin-left: 0.5rem;
+      }
     }
   }
 }

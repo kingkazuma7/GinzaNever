@@ -376,6 +376,30 @@ p.jp-text {
 .section3 .gallery-container .gallery-img03 {
   grid-area: img3;
 }
+.section3 p {
+  text-align: center;
+}
+.section3 p .btn-more {
+  margin: 2rem auto 0;
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.section3 p .btn-more:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.section3 p .btn-more::after {
+  content: "\f054";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
 
 .section4 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("/src/assets/images/TS--35.jpg");
