@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   font-size: 62.5%;
 }
@@ -268,41 +269,6 @@ p.jp-text {
   align-items: center;
   justify-content: center;
 }
-.section3 .gallery-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.section3 .gallery-grid {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 1fr);
-  gap: 1.5rem;
-}
-@media (min-width: 769px) {
-  .section3 .gallery-grid {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 2.5rem;
-  }
-}
-.section3 .gallery-item {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-}
-.section3 .gallery-item img {
-  height: 16vw;
-  max-height: 200px;
-  object-fit: cover;
-  width: 100%;
-  border-radius: 1.5rem 1.5rem 0 0;
-}
 
 .section4 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("/src/assets/images/TS--35.jpg");
@@ -526,6 +492,51 @@ p.jp-text {
   all: unset;
 }
 
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100rem;
+  margin: 0 auto;
+  min-height: 60vh;
+}
+
+.gallery-tile {
+  overflow: hidden;
+  border-radius: 1.2rem;
+  background: #181818;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.gallery-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 20vw);
+  }
+  .tile-large, .tile-vertical, .tile-horizontal, .tile-small {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 30vw);
+    gap: 1rem;
+  }
+}
 .info-container {
   display: flex;
   flex-direction: column;
@@ -602,6 +613,13 @@ p.jp-text {
   justify-content: center;
   flex-direction: column;
   padding: 0;
+}
+
+/* 画像がコンテナに合わせて表示されるように設定 */
+.luxury-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /*# sourceMappingURL=style.css.map */
