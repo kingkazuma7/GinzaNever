@@ -314,25 +314,48 @@ p {
 }
 
 .section3 {
-  background-color: $color-dark;
-  
-  // fullPage.jsからSwiperを保護
-  .gallery-slider {
-    position: relative !important;
-    transform: none !important;
-    transition: none !important;
-    
-    * {
-      position: relative;
-      transform: none !important;
-      transition: transform 0.3s ease, opacity 0.3s ease !important;
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .gallery-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gallery-grid {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 1.5rem;
+
+    @include desktop {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 2.5rem;
     }
   }
-  
-  // Swiperの動作を確保
-  .swiper-slide {
-    transform: translateX(0) !important;
-    transition: transform 0.3s ease !important;
+
+  .gallery-item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+  }
+
+  .gallery-item img {
+    height: 16vw;
+    max-height: 200px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 1.5rem 1.5rem 0 0;
   }
 }
 
@@ -577,6 +600,13 @@ p {
       }
     }
   }
+}
+
+// ギャラリーのミニマムスタイル（リセット）
+.gallery-grid,
+.gallery-item,
+.gallery-caption {
+  all: unset;
 }
 
 // 情報セクション
