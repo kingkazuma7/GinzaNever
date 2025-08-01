@@ -178,7 +178,7 @@ p.jp-text {
 .content {
   max-width: 120rem;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1em;
 }
 @media (min-width: 769px) {
   .content {
@@ -352,7 +352,7 @@ p.jp-text {
   width: 100%;
   max-width: 80rem;
   margin: 0 auto;
-  padding: 0 10rem;
+  padding: 4em 4em;
   gap: 1em;
 }
 @media screen and (max-width: 768px) {
