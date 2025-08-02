@@ -51,6 +51,8 @@ const verticalSwiper = new Swiper('.vertical-swiper', {
   },
   speed: 900,
   effect: 'slide',
+  observer: true,
+  observeParents: true
 });
 
 // 初期化関数
