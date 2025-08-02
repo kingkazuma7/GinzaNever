@@ -1,4 +1,12 @@
 // 画像の遅延読み込み設定
+alert("script.jsが読み込まれました。");
+// jQueryが読み込まれたか確認
+if (typeof jQuery !== 'undefined') {
+  alert("jQueryが読み込まれました。");
+} else {
+  alert("jQueryが読み込まれていません。");
+}
+
 function initializeLazyLoading() {
   const images = document.querySelectorAll('img[loading="lazy"]');
   if ('loading' in HTMLImageElement.prototype) {
