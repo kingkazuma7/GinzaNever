@@ -179,7 +179,7 @@ p.jp-text {
 .content {
   max-width: 120rem;
   margin: 0 auto;
-  padding: 1em;
+  padding: 2em 4em;
 }
 @media (min-width: 769px) {
   .content {
@@ -652,6 +652,49 @@ p.jp-text {
   display: block;
 }
 
+.concept-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+@media (min-width: 769px) {
+  .concept-content {
+    flex-direction: row;
+    gap: 5rem;
+    text-align: left;
+  }
+}
+.concept-content .concept-image {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 30rem;
+  height: 40rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+.concept-content .concept-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (min-width: 769px) {
+  .concept-content .concept-image {
+    width: 40%;
+    height: 45rem;
+  }
+}
+.concept-content .concept-text {
+  flex-grow: 1;
+}
+@media (min-width: 769px) {
+  .concept-content .concept-text p {
+    text-align: left;
+  }
+}
+
 @media (max-width: 900px) {
   .gallery-grid {
     grid-template-columns: 1fr 1fr;
@@ -710,13 +753,13 @@ p.jp-text {
 }
 .social-links a {
   color: #fff;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin: 0 1rem;
   transition: color 0.3s;
 }
 @media (min-width: 769px) {
   .social-links a {
-    font-size: 2rem;
+    font-size: 2.4rem;
     margin: 0 1.5rem;
   }
 }
