@@ -41,7 +41,7 @@ body {
 /* A elements that don't have a class get default styles */
 a:not([class]) {
   -webkit-text-decoration-skip: ink;
-  text-decoration-skip-ink: auto;
+          text-decoration-skip-ink: auto;
 }
 
 /* Make images easier to work with */
@@ -107,7 +107,6 @@ h1 {
   font-size: 2.5rem;
   margin-bottom: 2rem;
 }
-
 @media (min-width: 769px) {
   h1 {
     font-size: 4rem;
@@ -118,7 +117,6 @@ h2 {
   margin-bottom: 3rem;
   text-align: center;
 }
-
 @media (min-width: 769px) {
   h2 {
     font-size: 2.5rem;
@@ -131,7 +129,6 @@ p {
   letter-spacing: 0.05em;
   font-family: "Noto Sans JP", "Lato", sans-serif;
 }
-
 @media (min-width: 769px) {
   p {
     font-size: 1.8rem;
@@ -142,7 +139,6 @@ p.lead {
   font-weight: 300;
   font-family: "Lato", "Noto Sans JP", sans-serif;
 }
-
 @media (min-width: 769px) {
   p.lead {
     font-size: 2rem;
@@ -168,13 +164,11 @@ p.jp-text {
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
   overflow: hidden;
 }
-
 .section + .section {
   margin-top: 4rem;
   border-top: 2px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 }
-
 @media (min-width: 769px) {
   .section {
     padding: 6rem 2rem;
@@ -182,17 +176,18 @@ p.jp-text {
     border-radius: 3rem;
   }
 }
+
 .content {
   max-width: 120rem;
   margin: 0 auto;
   padding: 2em 4em;
 }
-
 @media (min-width: 769px) {
   .content {
     padding: 2rem;
   }
 }
+
 .section4, .section2, .section1 {
   background-position: center;
   background-size: cover;
@@ -201,7 +196,6 @@ p.jp-text {
 .section1 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/assets/images/TS--10.jpg");
 }
-
 .section1 .content {
   display: flex;
   flex-direction: column;
@@ -209,21 +203,19 @@ p.jp-text {
   justify-content: center;
   gap: 3rem;
 }
-
 @media (min-width: 769px) {
   .section1 .content {
     gap: 4rem;
   }
 }
+
 .logo {
   transform: translateY(30px);
 }
-
 .logo-svg {
   width: 20rem;
   height: 6rem;
 }
-
 @media (min-width: 769px) {
   .logo-svg {
     width: 30rem;
@@ -233,32 +225,25 @@ p.jp-text {
 .logo-main {
   animation: logoGlow 4s ease-in-out infinite alternate;
 }
-
 .logo-line {
   animation: lineExtend 3s ease-in-out infinite alternate;
 }
-
 .logo-line.left-line {
   animation-delay: 0.5s;
 }
-
 .logo-line.right-line {
   animation-delay: 1s;
 }
-
 .logo-diamond {
   animation: diamondRotate 6s linear infinite;
   transform-origin: center;
 }
-
 .logo-dot {
   animation: dotPulse 2s ease-in-out infinite alternate;
 }
-
 .logo-dot.left-dot {
   animation-delay: 0.3s;
 }
-
 .logo-dot.right-dot {
   animation-delay: 0.8s;
 }
@@ -276,7 +261,6 @@ p.jp-text {
   position: relative;
   white-space: nowrap;
 }
-
 @media (min-width: 769px) {
   .main-title {
     font-size: 5.5rem;
@@ -294,13 +278,13 @@ p.jp-text {
   transform: translateX(-50%);
   animation: underlineGlow 3s ease-in-out infinite alternate;
 }
-
 @media (min-width: 769px) {
   .main-title::after {
     width: 10rem;
     bottom: -1.5rem;
   }
 }
+
 @keyframes logoGlow {
   0% {
     filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 0.3));
@@ -382,7 +366,6 @@ p.jp-text {
   align-items: center;
   justify-content: center;
 }
-
 .section3 .gallery-container {
   display: grid;
   grid-template-areas: "img1 img2" "img1 img3";
@@ -396,7 +379,6 @@ p.jp-text {
   padding: 4em 4em;
   gap: 1em;
 }
-
 @media screen and (max-width: 768px) {
   .section3 .gallery-container {
     height: 60vh;
@@ -412,19 +394,15 @@ p.jp-text {
 .section3 .gallery-container .gallery-img01 {
   grid-area: img1;
 }
-
 .section3 .gallery-container .gallery-img02 {
   grid-area: img2;
 }
-
 .section3 .gallery-container .gallery-img03 {
   grid-area: img3;
 }
-
 .section3 p {
   text-align: center;
 }
-
 .section3 p .btn-more {
   margin: 2rem auto 0;
   display: inline-block;
@@ -436,11 +414,9 @@ p.jp-text {
   transition: all 0.3s ease;
   text-align: center;
 }
-
 .section3 p .btn-more:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .section3 p .btn-more::after {
   content: "\f054";
   font-family: "Font Awesome 6 Free";
@@ -460,7 +436,6 @@ p.jp-text {
   position: relative;
   z-index: 1;
 }
-
 @media (min-width: 769px) {
   .gallery-container {
     padding: 0 4rem;
@@ -472,7 +447,7 @@ p.jp-text {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.03);
   -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   height: 100%;
@@ -482,7 +457,6 @@ p.jp-text {
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
   z-index: 4;
 }
-
 .gallery-item::before {
   content: "";
   position: absolute;
@@ -494,29 +468,25 @@ p.jp-text {
   transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 1;
 }
-
 .gallery-item:hover {
   transform: translateY(-0.5rem) scale(1.01);
   box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.4);
   border-color: rgba(255, 255, 255, 0.3);
 }
-
 .gallery-item:hover::before {
   opacity: 1;
 }
-
 .gallery-item img {
   width: 100%;
   height: 28rem;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   filter: brightness(0.9) contrast(1.1);
   display: block;
   position: relative;
   z-index: 2;
 }
-
 @media (min-width: 769px) {
   .gallery-item img {
     height: 32rem;
@@ -526,12 +496,11 @@ p.jp-text {
   transform: scale(1.05);
   filter: brightness(1) contrast(1.1);
 }
-
 .gallery-caption {
   padding: 2.5rem;
   background: rgba(0, 0, 0, 0.85);
   -webkit-backdrop-filter: blur(15px);
-  backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
   text-align: center;
   flex: 1;
   display: flex;
@@ -540,7 +509,6 @@ p.jp-text {
   position: relative;
   z-index: 2;
 }
-
 .gallery-caption::before {
   content: "";
   position: absolute;
@@ -552,7 +520,6 @@ p.jp-text {
   transform: translateX(-50%);
   opacity: 0.6;
 }
-
 .gallery-caption h3 {
   font-size: 2rem;
   font-weight: 300;
@@ -563,7 +530,6 @@ p.jp-text {
   position: relative;
   font-family: "Lato", "Noto Sans JP", sans-serif;
 }
-
 @media (min-width: 769px) {
   .gallery-caption h3 {
     font-size: 2.2rem;
@@ -580,7 +546,6 @@ p.jp-text {
   background: rgba(255, 255, 255, 0.4);
   transform: translateX(-50%);
 }
-
 .gallery-caption p {
   font-size: 1.4rem;
   margin-bottom: 0;
@@ -590,19 +555,18 @@ p.jp-text {
   letter-spacing: 0.05em;
   font-family: "Noto Sans JP", "Lato", sans-serif;
 }
-
 @media (min-width: 769px) {
   .gallery-caption p {
     font-size: 1.6rem;
   }
 }
+
 .concept-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3rem;
 }
-
 @media (min-width: 769px) {
   .concept-content {
     flex-direction: row;
@@ -619,15 +583,13 @@ p.jp-text {
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
-
 .concept-content .concept-image img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   display: block;
 }
-
 @media (min-width: 769px) {
   .concept-content .concept-image {
     width: 40%;
@@ -637,12 +599,12 @@ p.jp-text {
 .concept-content .concept-text {
   flex-grow: 1;
 }
-
 @media (min-width: 769px) {
   .concept-content .concept-text p {
     text-align: left;
   }
 }
+
 @media (max-width: 900px) {
   .gallery-grid {
     grid-template-columns: 1fr 1fr;
@@ -672,7 +634,6 @@ p.jp-text {
   margin: 1rem 0;
   font-family: "Noto Sans JP", "Lato", sans-serif;
 }
-
 .contact-info .en-address {
   display: block;
   font-size: 1.4rem;
@@ -680,21 +641,18 @@ p.jp-text {
   margin-top: 0.5rem;
   font-family: "Lato", "Noto Sans JP", sans-serif;
 }
-
 .contact-info .contact-message {
   font-size: 1.4rem;
   color: rgba(255, 255, 255, 0.9);
   margin: 1.5rem 0;
   font-family: "Noto Sans JP", "Lato", sans-serif;
 }
-
 .contact-info a {
   color: #fff;
   text-decoration: none;
   transition: color 0.3s;
   font-weight: 400;
 }
-
 .contact-info a:focus {
   outline: 0.2rem solid #fff;
   outline-offset: 0.2rem;
@@ -706,7 +664,6 @@ p.jp-text {
   margin: 0 1rem;
   transition: color 0.3s;
 }
-
 @media (min-width: 769px) {
   .social-links a {
     font-size: 2.4rem;
@@ -721,12 +678,12 @@ p.jp-text {
 #fp-nav {
   display: none !important;
 }
-
 @media (min-width: 769px) {
   #fp-nav {
     display: block !important;
   }
 }
+
 .vertical-swiper,
 .vertical-swiper .swiper-slide {
   height: 100vh;
@@ -743,17 +700,14 @@ p.jp-text {
   position: relative;
   cursor: pointer;
 }
-
 .vertical-swiper .swiper-pagination-bullet-active {
   background: #fff;
   transform: scale(1.3);
   box-shadow: 0 0 1.5rem rgba(255, 255, 255, 0.5);
 }
-
 .vertical-swiper .swiper-pagination-bullet:hover {
   background: rgba(255, 255, 255, 0.5);
 }
-
 .vertical-swiper .swiper-pagination-bullet-active-main {
   background: #fff;
   box-shadow: 0 0 2rem rgba(255, 255, 255, 0.6);
@@ -772,7 +726,5 @@ p.jp-text {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
 }
-
-/*# sourceMappingURL=style.css.map */

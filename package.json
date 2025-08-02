@@ -8,7 +8,7 @@
     "copy-js": "cpx \"src/assets/js/**/*.js\" dist/src/assets/js",
     "copy-images": "cpx \"src/assets/images/**/*\" dist/src/assets/images",
     "sass-build": "sass src/assets/_scss:dist/src/assets/css --style compressed",
-    "build": "npm run clean && npm run copy-html && npm run copy-js && npm run copy-images && npm run sass-build",
+    "build": "npm run clean && npm run copy-html && npm run copy-js && npm run copy-images && npm run sass-build && node scripts/add-hash-to-assets.js",
     "sass": "sass src/assets/_scss:src/assets/css --watch",
     "optimize-images": "node scripts/optimize-images.js"
   },
