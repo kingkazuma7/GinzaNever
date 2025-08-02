@@ -261,31 +261,38 @@ const gallerySwiper = new Swiper('.gallery-slider', {
   },
 });
 
+// ページロード後一度だけアニメーションを実行するためのIntersection Observer
+const animateObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-animated');
+      observer.unobserve(entry.target); // 一度アニメーションしたら監視を停止
+    }
+  });
+}, {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.1 // 10%表示されたらアニメーション開始
+});
+
 // 初期化関数
 function initialize() {
-  // まずfullPage.jsを初期化
-  initializeFullPage();
+  // fullPage.jsの初期化（もし使用するなら）
+  // initializeFullPage(); 
   initializeMobileScroll();
   initializeLazyLoading();
-  
-  // fullPage.jsの初期化完了を待ってからSwiperを初期化
-  setTimeout(() => {
-    initializeGallerySlider();
-  }, 1500);
-  
-  // 最初のセクションのアニメーションを実行
-  setTimeout(() => {
-    const firstSection = document.querySelector('.section1');
-    if (firstSection) {
-      animateContent(firstSection);
-    }
-  }, 2000);
+
+  // アニメーション対象のテキスト要素を監視
+  document.querySelectorAll('h1, h2, p, .btn-more, .contact-info, .social-links, .logo').forEach(element => {
+    element.classList.add('js-animate-text'); // アニメーションクラスを付与
+    animateObserver.observe(element);
+  });
 }
 
 // DOMContentLoadedイベントで初期化を実行
 document.addEventListener('DOMContentLoaded', initialize);
 
 // リサイズ時のスライダー再初期化
-window.addEventListener('resize', function() {
-  initializeGallerySlider();
-});
+// window.addEventListener('resize', function() {
+//   initializeGallerySlider();
+// });
