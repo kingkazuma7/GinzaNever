@@ -7,7 +7,7 @@
     "copy-html": "cpx \"index.html\" dist",
     "copy-js": "cpx \"src/assets/js/**/*.js\" dist/src/assets/js",
     "copy-images": "cpx \"src/assets/images/**/*\" dist/src/assets/images",
-    "sass-build": "sass src/assets/_scss:dist/src/assets/css --style compressed",
+    "sass-build": "sass src/assets/_scss/style.scss dist/src/assets/css/style.css --style compressed && postcss dist/src/assets/css/style.css -u autoprefixer -o dist/src/assets/css/style.css",
     "build": "npm run clean && npm run copy-html && npm run copy-js && npm run copy-images && npm run sass-build && node scripts/add-hash-to-assets.js",
     "sass": "sass src/assets/_scss:src/assets/css --watch",
     "optimize-images": "node scripts/optimize-images.js"
@@ -15,7 +15,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^10.4.21",
     "cpx": "^1.5.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
     "sass": "^1.72.0"
   },
   "dependencies": {
