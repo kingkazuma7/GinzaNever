@@ -1,71 +1,3 @@
-// fullPage.jsの初期化と設定を管理する関数
-function initializeFullPage() {
-  const fpOptions = {
-    // 基本設定
-    licenseKey: 'YOUR_KEY_HERE',
-    navigation: true,
-    navigationPosition: 'right',
-    
-    // スクロール設定
-    scrollingSpeed: 700,
-    autoScrolling: true,
-    fitToSection: true,
-    scrollBar: false,
-    
-    // タッチデバイス設定
-    touchSensitivity: 15,
-    
-    // Swiperとの競合を避けるための設定
-    normalScrollElements: '.gallery-slider, .swiper, .swiper-slide, .swiper-wrapper',
-    
-    // レスポンシブ設定
-    responsiveWidth: 768,
-    responsiveHeight: 500,
-    
-    // スマートフォン時の設定
-    afterResponsive: function(isResponsive) {
-      // スマートフォンでもフルページスクロールを適用
-      fullpage_api.setAutoScrolling(true);
-      fullpage_api.setFitToSection(true);
-    },
-    
-    // アニメーション設定
-    afterLoad: function(origin, destination, direction) {
-      animateContent(destination.item);
-      
-      // セクション3（ギャラリー）でSwiperを再初期化
-      if (destination.index === 2) { // 0-indexed
-        setTimeout(() => {
-          if (window.gallerySlider) {
-            window.gallerySlider.update();
-            window.gallerySlider.autoplay.start();
-          } else {
-            initializeGallerySlider();
-          }
-        }, 500);
-      }
-    },
-
-    // スマートフォンでのスクロール時の挙動
-    onLeave: function(origin, destination, direction) {
-      if (window.innerWidth <= 768) {
-        return true; // スマートフォンでは通常スクロールを許可
-      }
-      
-      // セクション3でのスクロール制御
-      if (origin.index === 2) { // ギャラリーセクションから離脱
-        // Swiperの自動再生を一時停止
-        if (window.gallerySlider && window.gallerySlider.autoplay) {
-          window.gallerySlider.autoplay.stop();
-        }
-      }
-    }
-  };
-
-  // fullPage.jsの初期化
-  new fullpage('#fullpage', fpOptions);
-}
-
 // アニメーション実行済みフラグ
 const animatedSections = new Set();
 
@@ -223,6 +155,23 @@ function initializeGallerySlider() {
   return gallerySwiper;
 }
 
+// ページロード後一度だけアニメーションを実行するためのIntersection Observer
+const animateObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // iOS Safariのレンダリング quirksに対応するため、わずかな遅延を追加
+      setTimeout(() => {
+        entry.target.classList.add('is-animated');
+      }, 50); // 50msの遅延
+      observer.unobserve(entry.target); // 一度アニメーションしたら監視を停止
+    }
+  });
+}, {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.1 // 10%表示されたらアニメーション開始
+});
+
 // 縦方向の全画面Swiper（VerticalPreview）
 const verticalSwiper = new Swiper('.vertical-swiper', {
   direction: 'vertical',
@@ -261,27 +210,8 @@ const gallerySwiper = new Swiper('.gallery-slider', {
   },
 });
 
-// ページロード後一度だけアニメーションを実行するためのIntersection Observer
-const animateObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      // iOS Safariのレンダリング quirksに対応するため、わずかな遅延を追加
-      setTimeout(() => {
-        entry.target.classList.add('is-animated');
-      }, 50); // 50msの遅延
-      observer.unobserve(entry.target); // 一度アニメーションしたら監視を停止
-    }
-  });
-}, {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.1 // 10%表示されたらアニメーション開始
-});
-
 // 初期化関数
 function initialize() {
-  // fullPage.jsの初期化（もし使用するなら）
-  // initializeFullPage(); 
   initializeMobileScroll();
   initializeLazyLoading();
 
