@@ -700,6 +700,7 @@ p {
   height: 100vh;
 }
 .vertical-swiper {
+  touch-action: pan-y;
   .swiper-pagination {
     
     &-bullet {
