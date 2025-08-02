@@ -111,50 +111,6 @@ function initializeLazyLoading() {
   }
 }
 
-// ギャラリースライダーの初期化
-function initializeGallerySlider() {
-  // スライダー要素の存在確認
-  const swiperElement = document.querySelector('.gallery-slider');
-  if (!swiperElement) {
-    console.error('Swiper element not found');
-    return;
-  }
-
-  console.log('Initializing gallery slider...');
-  
-  // fullPage.jsの影響を無効化
-  swiperElement.style.transform = 'none';
-  swiperElement.style.transition = 'none';
-  
-  // Swiperギャラリーの初期化
-  const gallerySwiper = new Swiper('.gallery-slider', {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    loop: true,
-    speed: 600,
-    allowTouchMove: true,
-    autoplay: false,
-    pagination: {
-      el: '.gallery-slider .swiper-pagination',
-      clickable: true,
-      dynamicBullets: false,
-    },
-    navigation: false,
-    breakpoints: {
-      768: {
-        slidesPerView: 2,
-        spaceBetween: 40,
-        speed: 600,
-      }
-    },
-  });
-  
-  // スライダーインスタンスをグローバルに保存（デバッグ用）
-  window.gallerySlider = gallerySwiper;
-  
-  return gallerySwiper;
-}
-
 // ページロード後一度だけアニメーションを実行するためのIntersection Observer
 const animateObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
@@ -187,29 +143,6 @@ const verticalSwiper = new Swiper('.vertical-swiper', {
   effect: 'slide',
 });
 
-// ギャラリー（横スライド）はそのまま
-const gallerySwiper = new Swiper('.gallery-slider', {
-  slidesPerView: 1,
-  spaceBetween: 20,
-  loop: true,
-  speed: 600,
-  allowTouchMove: true,
-  autoplay: false,
-  pagination: {
-    el: '.gallery-slider .swiper-pagination',
-    clickable: true,
-    dynamicBullets: false,
-  },
-  navigation: false,
-  breakpoints: {
-    768: {
-      slidesPerView: 2,
-      spaceBetween: 40,
-      speed: 600,
-    }
-  },
-});
-
 // 初期化関数
 function initialize() {
   initializeMobileScroll();
@@ -225,7 +158,4 @@ function initialize() {
 // DOMContentLoadedイベントで初期化を実行
 document.addEventListener('DOMContentLoaded', initialize);
 
-// リサイズ時のスライダー再初期化
-// window.addEventListener('resize', function() {
-//   initializeGallerySlider();
-// });
+// リサイズ時のスライダー再初期化は不要
