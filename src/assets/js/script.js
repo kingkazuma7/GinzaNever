@@ -265,7 +265,10 @@ const gallerySwiper = new Swiper('.gallery-slider', {
 const animateObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('is-animated');
+      // iOS Safariのレンダリング quirksに対応するため、わずかな遅延を追加
+      setTimeout(() => {
+        entry.target.classList.add('is-animated');
+      }, 50); // 50msの遅延
       observer.unobserve(entry.target); // 一度アニメーションしたら監視を停止
     }
   });
