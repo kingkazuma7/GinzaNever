@@ -222,15 +222,16 @@ p {
 // スタイリッシュなメインタイトル
 .main-title {
   font-family: $font-family-base;
-  font-size: 3.5rem;
+  font-size: 2.2rem; // スマホでも折り返しが起きないサイズに調整
   font-weight: 100;
   color: $color-white;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em; // スマホではレターススペースを少し狭める
   text-transform: uppercase;
   text-align: center;
   margin: 0;
   transform: translateY(30px);
   position: relative;
+  white-space: nowrap; // 折り返しを防ぐ
   
   @include desktop {
     font-size: 5.5rem;
@@ -676,6 +677,38 @@ p {
 .vertical-swiper,
 .vertical-swiper .swiper-slide {
   height: 100vh;
+}
+.vertical-swiper {
+  .swiper-pagination {
+    
+    &-bullet {
+      width: .4em; // サイズを少し大きく
+      height: .4em;
+      background: rgba($color-white, 0.3); // 非アクティブ時の透明度を上げる
+      opacity: 1;
+      margin: 0 1rem; // マージンを広げる
+      border-radius: 50%;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      cursor: pointer;
+      
+      &-active {
+        background: $color-white;
+        transform: scale(1.3); // スケールを大きく
+        box-shadow: 0 0 1.5rem rgba($color-white, 0.5); // シャドウを控えめに
+      }
+      
+      &:hover {
+        background: rgba($color-white, 0.5); // ホバー時の色を追加
+      }
+    }
+    
+    // ダイナミックページネーション
+    &-bullet-active-main {
+      background: $color-white;
+      box-shadow: 0 0 2rem rgba($color-white, 0.6); // シャドウを調整
+    }
+  }
 }
 .vertical-swiper .swiper-slide {
   display: flex;
