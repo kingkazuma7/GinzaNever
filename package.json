@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "description": "Ginza Never Website",
   "scripts": {
+    "clean": "rm -rf dist",
+    "copy-html": "cpx \"index.html\" dist",
+    "copy-js": "cpx \"src/assets/js/**/*.js\" dist/assets/js",
+    "copy-images": "cpx \"src/assets/images/**/*\" dist/assets/images",
+    "sass-build": "sass src/assets/_scss:dist/assets/css --style compressed",
+    "build": "npm run clean && npm run copy-html && npm run copy-js && npm run copy-images && npm run sass-build",
     "sass": "sass src/assets/_scss:src/assets/css --watch",
-    "build": "sass src/assets/_scss:src/assets/css --style compressed",
     "optimize-images": "node scripts/optimize-images.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cpx": "^1.5.0",
     "sass": "^1.72.0"
   },
   "dependencies": {
