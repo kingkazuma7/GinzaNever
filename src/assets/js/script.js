@@ -1,101 +1,3 @@
-// アニメーション実行済みフラグ
-const animatedSections = new Set();
-
-// アニメーションとコンテンツ表示の制御
-function animateContent(section) {
-  // セクションのインデックスを取得
-  const sectionIndex = Array.from(document.querySelectorAll('.section')).indexOf(section);
-  
-  // すでにアニメーション済みの場合はスキップ
-  if (animatedSections.has(sectionIndex)) {
-    return;
-  }
-  
-  // アニメーション済みとしてマーク
-  animatedSections.add(sectionIndex);
-  
-  // セクション1の特別な処理（ロゴとタイトル）
-  if (section.classList.contains('section1')) {
-    const logo = section.querySelector('.logo');
-    const title = section.querySelector('.main-title');
-    
-    if (logo) {
-      setTimeout(() => {
-        logo.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        logo.style.opacity = '1';
-        logo.style.transform = 'translateY(0)';
-      }, 400);
-    }
-    
-    if (title) {
-      setTimeout(() => {
-        title.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        title.style.opacity = '1';
-        title.style.transform = 'translateY(0)';
-      }, 900);
-    }
-    return;
-  }
-  
-  const items = section.querySelectorAll('.gallery-item, h2, p, .btn-more, .contact-info, .social-links');
-  
-  // ギャラリーセクションの特別な処理
-  if (section.classList.contains('section3')) {
-    // スライダーが既に動作しているので、セクションタイトルのみアニメーション
-    const title = section.querySelector('h2');
-    if (title) {
-      setTimeout(() => {
-        title.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        title.style.opacity = '1';
-        title.style.transform = 'translateY(0)';
-      }, 300);
-    }
-    return;
-  }
-  
-  items.forEach((item, index) => {
-    // 初期状態を設定（透明から開始）
-    item.style.opacity = '0';
-    item.style.transform = 'translateY(20px)';
-    
-    // ふわっと現れるアニメーション
-    setTimeout(() => {
-      item.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      item.style.opacity = '1';
-      item.style.transform = 'translateY(0)';
-    }, index * 100 + 150);
-  });
-}
-
-// スマートフォンでのスクロール位置調整
-function initializeMobileScroll() {
-  if (window.innerWidth <= 768) {
-    let scrollTimeout;
-    
-    document.addEventListener('scroll', function() {
-      // スクロール中のパフォーマンス最適化のためにデバウンス処理を追加
-      if (scrollTimeout) {
-        window.cancelAnimationFrame(scrollTimeout);
-      }
-
-      scrollTimeout = window.requestAnimationFrame(function() {
-        adjustScrollPosition();
-      });
-    }, { passive: true });
-  }
-}
-
-// スクロール位置の調整処理
-function adjustScrollPosition() {
-  const sections = document.querySelectorAll('.section');
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
-    if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-}
-
 // 画像の遅延読み込み設定
 function initializeLazyLoading() {
   const images = document.querySelectorAll('img[loading="lazy"]');
@@ -145,7 +47,6 @@ const verticalSwiper = new Swiper('.vertical-swiper', {
 
 // 初期化関数
 function initialize() {
-  initializeMobileScroll();
   initializeLazyLoading();
 
   // アニメーション対象のテキスト要素を監視
