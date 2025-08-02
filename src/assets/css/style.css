@@ -193,7 +193,7 @@ p.jp-text {
 }
 
 .section1 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/assets/images/TS--10.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/TS--10.jpg");
 }
 .section1 .content {
   display: flex;
@@ -355,7 +355,7 @@ p.jp-text {
 }
 
 .section2 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/src/assets/images/TS--25.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("../images/TS--25.jpg");
 }
 
 .section3 {
@@ -425,7 +425,7 @@ p.jp-text {
 }
 
 .section4 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("/src/assets/images/TS--35.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("../images/TS--35.jpg");
 }
 
 .gallery-container {
